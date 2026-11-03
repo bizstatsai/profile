@@ -23,12 +23,11 @@ export default function ArchitecturePatterns() {
           </p>
         </ScrollReveal>
 
-        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '22px' }} role="tablist" aria-label="Filter patterns by layer">
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '22px' }} role="group" aria-label="Filter patterns by layer">
           {LAYERS.map(l => (
             <button
               key={l}
-              role="tab"
-              aria-selected={layer === l}
+              aria-pressed={layer === l}
               onClick={() => { setLayer(l); const first = architecturePatterns.find(p => l === 'All' || p.layer === l); if (first) setOpen(first.slug) }}
               className={`btn ${layer === l ? 'btn-primary' : 'btn-outline'}`}
               style={{ padding: '6px 14px', fontSize: '0.8rem' }}
@@ -39,11 +38,10 @@ export default function ArchitecturePatterns() {
         </div>
 
         <div className="patterns-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(220px, 300px) minmax(0, 1fr)', gap: '24px', alignItems: 'start' }}>
-          <div style={{ display: 'grid', gap: '6px' }} role="list">
+          <div style={{ display: 'grid', gap: '6px' }} role="group" aria-label="Patterns">
             {visible.map(p => (
               <button
                 key={p.slug}
-                role="listitem"
                 onClick={() => setOpen(p.slug)}
                 aria-pressed={current.slug === p.slug}
                 style={{
@@ -93,7 +91,7 @@ export default function ArchitecturePatterns() {
               <dt>Related</dt>
               <dd style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                 {current.related.map(slug => bySlug[slug] ? (
-                  <button key={slug} onClick={() => { setLayer('All'); setOpen(slug) }} className="tag" style={{ cursor: 'pointer', background: 'transparent' }}>
+                  <button key={slug} onClick={() => { setLayer('All'); setOpen(slug) }} className="tag" style={{ cursor: 'pointer', background: 'transparent', whiteSpace: 'normal', textAlign: 'left', lineHeight: 1.4 }}>
                     {bySlug[slug].title}
                   </button>
                 ) : null)}

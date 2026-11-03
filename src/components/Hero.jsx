@@ -9,7 +9,7 @@ export default function Hero() {
       <div className="container">
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'minmax(0, 1.6fr) minmax(260px, 1fr)',
+          gridTemplateColumns: 'minmax(0, 1.6fr) minmax(min(260px, 100%), 1fr)',
           gap: '48px',
           alignItems: 'start',
         }} className="hero-grid">

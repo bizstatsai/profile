@@ -16,7 +16,7 @@ export default function Books() {
           and AuthorHouse.
         </p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '24px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(250px, 100%), 1fr))', gap: '24px' }}>
           {books.map((book, i) => (
             <ScrollReveal key={i} delay={i * 0.1}>
             <div className="card" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>

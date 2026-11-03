@@ -13,7 +13,7 @@
   --surface-2: #202835;
   --ink: #e8ebef;
   --ink-2: #aab2bf;
-  --ink-3: #727c8b;
+  --ink-3: #98a1b0;
   --rule: #2a323e;
   --accent: #7fa6e0;
   --accent-2: #a9c4ec;
@@ -21,6 +21,7 @@
   --signal: #ff8a4c;
   --signal-soft: rgba(255, 138, 76, 0.14);
   --ok: #5fc48d;
+  --warn: #e2b74a;
   --paper: #f6f7f4;
   --paper-ink: #1c2230;
   color-scheme: dark;
@@ -51,7 +52,7 @@
   --surface-2: #f1f3ef;
   --ink: #1c2230;
   --ink-2: #4a5468;
-  --ink-3: #7b8498;
+  --ink-3: #5b6577;
   --rule: #d6dae2;
   --accent: #1f4e8c;
   --accent-2: #2f66b0;
@@ -59,6 +60,7 @@
   --signal: #d1540f;
   --signal-soft: rgba(209, 84, 15, 0.12);
   --ok: #1f7a4d;
+  --warn: #8a5a00;
   --paper: #ffffff;
   --paper-ink: #1c2230;
   color-scheme: light;

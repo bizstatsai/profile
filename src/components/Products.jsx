@@ -5,7 +5,7 @@ import '../App.css'
 const STATUS = {
   live: { label: 'Live', color: 'var(--success)' },
   early: { label: 'Early access', color: 'var(--accent-light)' },
-  building: { label: 'In development', color: '#f5a623' },
+  building: { label: 'In development', color: 'var(--warn)' },
   soon: { label: 'Coming soon', color: 'var(--text-muted)' },
 }
 
@@ -49,7 +49,7 @@ export default function Products() {
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
           gap: '20px',
         }}>
           {products.map((product, i) => (
@@ -74,7 +74,8 @@ export default function Products() {
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  gap: '12px',
+                  flexWrap: 'wrap',
+                  gap: '6px 12px',
                   marginTop: '6px',
                   paddingTop: '12px',
                   borderTop: '1px solid var(--border)',
@@ -88,7 +89,7 @@ export default function Products() {
                       href={product.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{ color: 'var(--accent-light)', textDecoration: 'none' }}
+                      style={{ color: 'var(--accent-light)', textDecoration: 'none', overflowWrap: 'anywhere', minWidth: 0 }}
                     >
                       {product.url.replace(/^https:\/\/(www\.)?/, '').replace(/\/$/, '')} &rarr;
                     </a>
