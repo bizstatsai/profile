@@ -4,7 +4,7 @@ import {
   services, clients, caseStudies, faqItems, techRadar,
   servicesDetail, speakingTopics, navLinks, methodology,
   maturityPyramid, architecturePatterns, thoughtLeadership,
-  speakerKit, socialLinks,
+  speakerKit, socialLinks, products,
 } from '../data/profile'
 
 describe('profile data', () => {
@@ -137,5 +137,30 @@ describe('profile data', () => {
   it('has social links', () => {
     expect(socialLinks.linkedin).toContain('linkedin.com')
     expect(socialLinks.github).toContain('github.com')
+  })
+})
+
+describe('products data', () => {
+  it('has 13 products with the required fields', () => {
+    expect(products).toHaveLength(13)
+    products.forEach(p => {
+      expect(p.name).toBeTruthy()
+      expect(p.tagline).toBeTruthy()
+      expect(p.description).toBeTruthy()
+      expect(['live', 'early', 'building', 'soon']).toContain(p.status)
+      expect(p.platform).toBeTruthy()
+      expect(p.tags.length).toBeGreaterThan(0)
+      if (p.url) expect(p.url).toMatch(/^https:\/\/[a-z.]+bizstats\.ai/)
+    })
+  })
+
+  it('lists the live products and links them', () => {
+    const live = products.filter(p => p.status === 'live').map(p => p.name)
+    expect(live).toEqual(expect.arrayContaining(['BotNX', 'BizStats Hub', 'BizStats Labs', 'Status', 'bizstats.ai']))
+    products.filter(p => p.status === 'live').forEach(p => expect(p.url).toBeTruthy())
+  })
+
+  it('has a Products nav link', () => {
+    expect(navLinks.find(l => l.href === '#products')).toBeTruthy()
   })
 })

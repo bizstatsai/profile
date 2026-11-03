@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import Hero from '../components/Hero'
 import About from '../components/About'
+import Products from '../components/Products'
 
 describe('Hero component', () => {
   it('renders name and bio', () => {
@@ -35,5 +36,22 @@ describe('About component', () => {
   it('renders section title', () => {
     render(<About />)
     expect(screen.getByText('What I Do')).toBeInTheDocument()
+  })
+})
+
+describe('Products component', () => {
+  it('renders the section title and every product', () => {
+    render(<Products />)
+    expect(screen.getByText('Products I Architect')).toBeInTheDocument()
+    expect(screen.getByText('BotNX')).toBeInTheDocument()
+    expect(screen.getByText('DeployNX')).toBeInTheDocument()
+    expect(screen.getByText('BizStats Hub')).toBeInTheDocument()
+  })
+
+  it('links live products to their public URL', () => {
+    render(<Products />)
+    const link = screen.getByText(/botnx\.bizstats\.ai/).closest('a')
+    expect(link).toHaveAttribute('href', 'https://botnx.bizstats.ai')
+    expect(link).toHaveAttribute('target', '_blank')
   })
 })

@@ -7,6 +7,7 @@ import About from './components/About'
 // Lazy load below-the-fold sections
 const Experience = lazy(() => import('./components/Experience'))
 const CaseStudies = lazy(() => import('./components/CaseStudies'))
+const Products = lazy(() => import('./components/Products'))
 const Methodology = lazy(() => import('./components/Methodology'))
 const MaturityPyramid = lazy(() => import('./components/MaturityPyramid'))
 const Books = lazy(() => import('./components/Books'))
@@ -56,6 +57,7 @@ export default function App() {
         <Suspense fallback={<SectionFallback />}>
           <Experience />
           <CaseStudies />
+          <Products />
           <Methodology />
           <MaturityPyramid />
           <Books />
