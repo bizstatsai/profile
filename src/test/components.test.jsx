@@ -7,7 +7,8 @@ import Products from '../components/Products'
 describe('Hero component', () => {
   it('renders name and bio', () => {
     render(<Hero />)
-    expect(screen.getByText(/Srini/)).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Srini Centhala')
+    expect(screen.getByText(/See the patterns/)).toBeInTheDocument()
     expect(screen.getByText(/Get in Touch/)).toBeInTheDocument()
     expect(screen.getByText(/View Experience/)).toBeInTheDocument()
   })

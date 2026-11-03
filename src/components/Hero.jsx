@@ -1,164 +1,82 @@
 import { profile, clients } from '../data/profile'
 import '../App.css'
 
+const REVISION = '2026.11'
+
 export default function Hero() {
   return (
-    <section style={{
-      minHeight: '100vh',
-      display: 'flex',
-      alignItems: 'center',
-      position: 'relative',
-      overflow: 'hidden',
-    }}>
-      <div style={{
-        position: 'absolute',
-        width: '500px',
-        height: '500px',
-        borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(108,99,255,0.12) 0%, transparent 70%)',
-        top: '-100px',
-        right: '-100px',
-        pointerEvents: 'none',
-      }} />
-      <div style={{
-        position: 'absolute',
-        width: '400px',
-        height: '400px',
-        borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(0,212,255,0.08) 0%, transparent 70%)',
-        bottom: '-50px',
-        left: '-100px',
-        pointerEvents: 'none',
-      }} />
-
+    <section id="top" style={{ padding: '140px 0 72px', position: 'relative', overflow: 'hidden' }}>
       <div className="container">
-        <div style={{ display: 'flex', alignItems: 'center', gap: '48px', flexWrap: 'wrap' }}>
-        <div style={{ flexShrink: 0 }}>
-          <img
-            src="/images/headshot.jpg"
-            alt={profile.name}
-            onError={e => { e.target.onerror = null; e.target.src = '/images/avatar-placeholder.svg' }}
-            style={{
-              width: '180px',
-              height: '180px',
-              borderRadius: '50%',
-              objectFit: 'cover',
-              border: '3px solid var(--accent)',
-              boxShadow: '0 0 40px var(--accent-glow)',
-            }}
-          />
-        </div>
-        <div style={{ maxWidth: '650px', flex: 1 }}>
-          <div style={{ display: 'inline-block', marginBottom: '20px' }}>
-            <span className="tag" style={{ fontSize: '0.85rem', padding: '6px 16px' }}>
-              {profile.role} @ {profile.company}
-            </span>
-          </div>
-
-          <h1 style={{
-            fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-            fontWeight: 700,
-            lineHeight: 1.1,
-            marginBottom: '24px',
-          }}>
-            Hi, I'm{' '}
-            <span style={{
-              background: 'linear-gradient(135deg, var(--gradient-start), var(--gradient-end))',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'minmax(0, 1.6fr) minmax(260px, 1fr)',
+          gap: '48px',
+          alignItems: 'start',
+        }} className="hero-grid">
+          <div style={{ minWidth: 0 }}>
+            <div className="sheet-label">Sheet 01 · {profile.title}</div>
+            <h1 style={{
+              fontSize: 'clamp(2.6rem, 6vw, 4.6rem)',
+              fontWeight: 800,
+              lineHeight: 1.02,
+              marginBottom: '22px',
+              letterSpacing: '-0.02em',
             }}>
               {profile.name}
-            </span>
-          </h1>
+            </h1>
+            <p style={{
+              fontSize: 'clamp(1.05rem, 1.6vw, 1.25rem)',
+              color: 'var(--ink-2)',
+              maxWidth: '58ch',
+              marginBottom: '28px',
+              lineHeight: 1.6,
+            }}>
+              {profile.bio}
+            </p>
 
-          <p style={{
-            fontSize: 'clamp(1.05rem, 2vw, 1.2rem)',
-            color: 'var(--text-secondary)',
-            lineHeight: 1.7,
-            marginBottom: '24px',
-            maxWidth: '650px',
-          }}>
-            {profile.bio}
-          </p>
+            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginBottom: '26px' }}>
+              <a href="#patterns" className="btn btn-primary">See the patterns</a>
+              <a href="#experience" className="btn btn-outline">View Experience</a>
+              <a href="#contact" className="btn btn-outline">Get in Touch</a>
+              <a href="/Srini_Centhala_Resume.pdf" download className="btn btn-signal">Resume</a>
+            </div>
 
-          {/* Client logos marquee */}
-          <div style={{
-            display: 'flex',
-            gap: '12px',
-            flexWrap: 'wrap',
-            marginBottom: '32px',
-          }}>
-            {clients.slice(0, 8).map(client => (
-              <span key={client} style={{
-                padding: '4px 14px',
-                fontSize: '0.78rem',
-                fontFamily: "'JetBrains Mono', monospace",
-                color: 'var(--text-secondary)',
-                border: '1px solid var(--border)',
-                borderRadius: '6px',
-                background: 'var(--bg-secondary)',
-              }}>
-                {client}
+            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--ink-3)', marginRight: '4px' }}>
+                Known uses
               </span>
-            ))}
+              {clients.slice(0, 8).map(client => (
+                <span key={client} className="tag">{client}</span>
+              ))}
+            </div>
           </div>
 
-          <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', marginBottom: '16px' }}>
-            <a href="#contact" className="btn btn-primary">
-              Get in Touch
-              <span style={{ fontSize: '1.1rem' }}>&rarr;</span>
-            </a>
-            <a href="#experience" className="btn btn-outline">
-              View Experience
-            </a>
-            <a href="/Srini_Centhala_Resume.pdf" download className="btn btn-outline"
-              style={{ gap: '6px' }}>
-              &#8681; Resume
-            </a>
-          </div>
-
-          <p style={{
-            fontSize: '0.85rem',
-            color: 'var(--text-muted)',
-            fontFamily: "'JetBrains Mono', monospace",
-          }}>
-            {profile.location} &middot; US On-site Since 1997
-          </p>
-
-          {/* Stats */}
-          <div style={{
-            display: 'flex',
-            gap: '48px',
-            marginTop: '48px',
-            paddingTop: '32px',
-            borderTop: '1px solid var(--border)',
-            flexWrap: 'wrap',
-          }}>
-            {[
-              { value: profile.stats.yearsExperience, label: 'Years Experience' },
-              { value: profile.stats.fortune100Clients, label: 'Fortune 100 Clients' },
-              { value: String(profile.stats.publishedBooks), label: 'Published Books' },
-              { value: profile.stats.linkedinFollowers, label: 'LinkedIn Followers' },
-            ].map(stat => (
-              <div key={stat.label}>
-                <div style={{
-                  fontSize: '2rem',
-                  fontWeight: 700,
-                  background: 'linear-gradient(135deg, var(--gradient-start), var(--gradient-end))',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                }}>
-                  {stat.value}
-                </div>
-                <div style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
-                  {stat.label}
-                </div>
-              </div>
-            ))}
+          <div className="title-block" aria-label="Title block">
+            <div className="row"><span className="k">Name</span><span className="v">{profile.name}</span></div>
+            <div className="row"><span className="k">Title</span><span className="v">{profile.title}</span></div>
+            <div className="row"><span className="k">Firm</span><span className="v">{profile.company} · {profile.product}</span></div>
+            <div className="row"><span className="k">Location</span><span className="v">{profile.location}</span></div>
+            <div className="row"><span className="k">Practice</span><span className="v">{profile.stats.yearsExperience} years · US on-site since 1997</span></div>
+            <div className="row"><span className="k">Published</span><span className="v">{profile.stats.publishedBooks} books · Business Expert Press</span></div>
+            <div className="row"><span className="k">Validation</span><span className="v">Forrester: “Excellent Architecture &amp; Design”</span></div>
+            <div className="row"><span className="k">Revision</span><span className="v">{REVISION} · all diagrams rendered from source</span></div>
           </div>
         </div>
+
+        <div className="proof">
+          <div><div className="n">{profile.stats.yearsExperience}</div><div className="l">Years Experience</div></div>
+          <div><div className="n">{profile.stats.fortune100Clients}</div><div className="l">Fortune 100 Clients</div></div>
+          <div><div className="n">{String(profile.stats.publishedBooks)}</div><div className="l">Published Books</div></div>
+          <div><div className="n">13</div><div className="l">Products architected</div></div>
+          <div><div className="n">{profile.stats.linkedinFollowers}</div><div className="l">LinkedIn Followers</div></div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 860px) {
+          .hero-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </section>
   )
 }

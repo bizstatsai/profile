@@ -21,7 +21,6 @@ export default function Services() {
           {servicesDetail.map((service, i) => (
             <ScrollReveal key={service.title} delay={i * 0.08}>
               <div className="card" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                <div style={{ fontSize: '1.8rem', marginBottom: '12px' }}>{service.icon}</div>
                 <h3 style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '10px' }}>
                   {service.title}
                 </h3>

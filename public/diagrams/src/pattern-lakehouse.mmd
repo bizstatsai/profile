@@ -1,0 +1,15 @@
+%% id: pattern-lakehouse · level: pattern · visibility: public · owner: architect
+flowchart LR
+  SRC["Sources<br/>apps · SaaS · files · streams"] --> B["Bronze<br/>raw, append-only<br/>schema on read"]
+  B -->|"cleanse · conform · dedupe"| S["Silver<br/>conformed entities<br/>data contracts"]
+  S -->|"model · aggregate"| G["Gold<br/>business marts<br/>metrics layer"]
+  G --> BI["BI · dashboards"]
+  G --> ML["Feature store · ML"]
+  S --> ML
+  CAT["Catalogue · lineage · access policy"] -.-> B
+  CAT -.-> S
+  CAT -.-> G
+  classDef tier fill:#e8f4fd,stroke:#2b7de9,color:#1a1a1a;
+  classDef gov fill:#fff4e0,stroke:#d58b00,color:#1a1a1a;
+  classDef out fill:#e8ffe8,stroke:#2b9e2b,color:#1a1a1a;
+  class B,S,G tier; class CAT gov; class BI,ML out;

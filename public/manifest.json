@@ -4,8 +4,8 @@
   "description": "Chief Data and AI Architect. 25+ years, Fortune 100 clients, 4 published books.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0a0a0f",
-  "theme_color": "#6c63ff",
+  "background_color": "#0f1216",
+  "theme_color": "#0f1216",
   "icons": [
     {
       "src": "/favicon-32.png",

@@ -1,0 +1,21 @@
+%% id: pattern-scale-to-zero · level: pattern · visibility: public · owner: architect
+sequenceDiagram
+  autonumber
+  actor V as First visitor
+  participant D as Door service<br/>always on, 1 replica
+  participant W as Waker<br/>autoscaler trigger
+  participant E as Environment<br/>scaled to zero
+  participant S as Shared services<br/>kept warm while anything is awake
+  participant Z as Idle sleeper<br/>cron
+  V->>D: request
+  D-->>V: holding page: "waking, 2–5 min"
+  D->>W: wake signal
+  W->>S: ensure warm
+  W->>E: scale to 1
+  E-->>D: healthy
+  V->>D: refresh
+  D->>E: proxy
+  E-->>V: page
+  Note over Z,E: quiet for N minutes
+  Z->>E: scale to 0
+  Z->>S: release keepalive

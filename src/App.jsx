@@ -8,6 +8,7 @@ import About from './components/About'
 const Experience = lazy(() => import('./components/Experience'))
 const CaseStudies = lazy(() => import('./components/CaseStudies'))
 const Products = lazy(() => import('./components/Products'))
+const Platform = lazy(() => import('./components/Platform'))
 const Methodology = lazy(() => import('./components/Methodology'))
 const MaturityPyramid = lazy(() => import('./components/MaturityPyramid'))
 const Books = lazy(() => import('./components/Books'))
@@ -55,20 +56,21 @@ export default function App() {
         <Hero />
         <About />
         <Suspense fallback={<SectionFallback />}>
-          <Experience />
-          <CaseStudies />
           <Products />
+          <ArchitecturePatterns />
+          <Platform />
+          <CaseStudies />
+          <Experience />
           <Methodology />
           <MaturityPyramid />
+          <Timeline />
           <Books />
+          <ThoughtLeadership />
+          <FAQ />
           <Skills />
           <TechRadar />
-          <ArchitecturePatterns />
-          <Services />
           <Certifications />
-          <Timeline />
-          <FAQ />
-          <ThoughtLeadership />
+          <Services />
           <Speaking />
           <SpeakerKit />
           <Contact />

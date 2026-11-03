@@ -114,11 +114,24 @@ describe('profile data', () => {
     expect(levelNums).toEqual([5, 4, 3, 2, 1])
   })
 
-  it('has 6 architecture patterns', () => {
-    expect(architecturePatterns).toHaveLength(6)
+  it('has 10 architecture patterns in the pattern-language form', () => {
+    expect(architecturePatterns).toHaveLength(10)
     architecturePatterns.forEach(p => {
-      expect(p.layers.length).toBeGreaterThan(0)
-      expect(p.tags.length).toBeGreaterThan(0)
+      expect(p.slug).toBeTruthy()
+      expect(p.intent).toBeTruthy()
+      expect(p.forces).toBeTruthy()
+      expect(p.consequences).toBeTruthy()
+      expect(p.knownUses.length).toBeGreaterThan(0)
+      expect(p.diagram).toMatch(/^pattern-[a-z-]+$/)
+      p.related.forEach(r => expect(architecturePatterns.find(x => x.slug === r)).toBeTruthy())
+    })
+  })
+
+  it('has every pattern diagram rendered in public/diagrams', async () => {
+    const fs = await import('node:fs')
+    architecturePatterns.forEach(p => {
+      expect(fs.existsSync(`public/diagrams/${p.diagram}.svg`)).toBe(true)
+      expect(fs.existsSync(`public/diagrams/src/${p.diagram}.mmd`)).toBe(true)
     })
   })
 
