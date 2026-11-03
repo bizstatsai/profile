@@ -1,0 +1,14 @@
+stateDiagram-v2
+  [*] --> Normal
+  Normal: Normal<br/>pool A serves · B scaled low · WAL streaming
+  Normal --> Degraded: health check fails ×1-2<br/>or CoreDNS / node loss
+  Degraded: Degraded<br/>alert on-call · B pre-warmed · writes still on A
+  Degraded --> Normal: recovers within 3 min
+  Degraded --> FailingOver: 3 consecutive failures
+  FailingOver: Failing over<br/>maintenance page for writes · fence A · promote PGB · scale B
+  FailingOver --> FailedOver: /healthz ok on B
+  FailedOver: Failed over<br/>pool B serves · RTO target 15 min · degraded LLM (API only)
+  FailedOver --> FailingBack: A repaired · PGA re-synced as replica
+  FailingBack: Failing back<br/>freeze writes 2 min · promote PGA · flip weights
+  FailingBack --> Normal: verified · post-incident review
+  FailedOver --> FailedOver: daily backup from PGB to R2

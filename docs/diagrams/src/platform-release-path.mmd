@@ -1,0 +1,33 @@
+sequenceDiagram
+  autonumber
+  actor E as Engineer
+  participant GH as GitHub (main)
+  participant T as CI · tests
+  participant B as CI · build + deploy
+  participant R as Image registry
+  participant V as Secrets vault<br/>opened only for the deploy window
+  participant S as Staging cluster
+  participant O as Release owner
+  participant P as Production cluster
+  participant N as Backup storage
+
+  E->>GH: merge PR → main (docs-only commits skipped)
+  GH->>T: full backend + frontend suites · deployed-code coverage gates
+  GH->>B: build all service images in parallel
+  B->>R: push release tag (write-once)
+  T-->>GH: green
+  GH->>B: deploy-stage (protected environment)
+  B->>V: short-lived credentials → secrets map
+  B->>S: wake shared services · state backup · terraform apply · migration job · health check · re-apply autoscaling
+  Note over GH,S: minutes from merge to staging
+  O->>GH: deploy-prod release_tag=<tag> (manual promotion)
+  GH->>V: open vault for the window
+  GH->>B: guard · verify tag · fetch secrets
+  B->>N: blocking database backup (deploy fails if it fails)
+  B->>P: render config · state backup · terraform apply · migration job
+  B->>P: health check · smoke test · search-engine ping
+  alt failure
+    B->>P: roll back to previous release
+  end
+  GH->>V: close vault
+  Note over O,P: approval gate with a time limit · production lags main until promoted

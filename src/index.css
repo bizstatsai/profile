@@ -1,38 +1,69 @@
-/* Dark theme (default) */
+/* ------------------------------------------------------------------
+   Design tokens — the "drawing register" system.
+   Dark is the default (the site has always been dark-first); light is
+   an explicit choice via data-theme="light" (see hooks/useTheme.jsx).
+   Legacy token names (--bg-primary, --accent-light, …) are kept as
+   aliases so every existing component keeps working.
+   ------------------------------------------------------------------ */
 :root,
 [data-theme="dark"] {
-  --bg-primary: #0a0a0f;
-  --bg-secondary: #12121a;
-  --bg-card: #1a1a2e;
-  --bg-card-hover: #1f1f35;
-  --text-primary: #e8e8f0;
-  --text-secondary: #9898b0;
-  --text-muted: #686880;
-  --accent: #6c63ff;
-  --accent-light: #8b83ff;
-  --accent-glow: rgba(108, 99, 255, 0.15);
-  --gradient-start: #6c63ff;
-  --gradient-end: #00d4ff;
-  --border: #2a2a3e;
-  --success: #00c9a7;
+  --bg: #0f1216;
+  --bg-2: #151a21;
+  --surface: #1a202a;
+  --surface-2: #202835;
+  --ink: #e8ebef;
+  --ink-2: #aab2bf;
+  --ink-3: #98a1b0;
+  --rule: #2a323e;
+  --accent: #7fa6e0;
+  --accent-2: #a9c4ec;
+  --accent-glow: rgba(127, 166, 224, 0.14);
+  --signal: #ff8a4c;
+  --signal-soft: rgba(255, 138, 76, 0.14);
+  --ok: #5fc48d;
+  --warn: #e2b74a;
+  --paper: #f6f7f4;
+  --paper-ink: #1c2230;
+  color-scheme: dark;
+
+  /* aliases */
+  --bg-primary: var(--bg);
+  --bg-secondary: var(--bg-2);
+  --bg-card: var(--surface);
+  --bg-card-hover: var(--surface-2);
+  --text-primary: var(--ink);
+  --text-secondary: var(--ink-2);
+  --text-muted: var(--ink-3);
+  --accent-light: var(--accent-2);
+  --gradient-start: var(--accent);
+  --gradient-end: var(--accent-2);
+  --border: var(--rule);
+  --success: var(--ok);
+
+  --font-display: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'IBM Plex Sans', 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
 }
 
-/* Light theme */
 [data-theme="light"] {
-  --bg-primary: #f8f9fc;
-  --bg-secondary: #eef0f5;
-  --bg-card: #ffffff;
-  --bg-card-hover: #f0f2f8;
-  --text-primary: #1a1a2e;
-  --text-secondary: #555570;
-  --text-muted: #8888a0;
-  --accent: #5a52e0;
-  --accent-light: #6c63ff;
-  --accent-glow: rgba(108, 99, 255, 0.1);
-  --gradient-start: #5a52e0;
-  --gradient-end: #00b8d4;
-  --border: #d8dae5;
-  --success: #00a88a;
+  --bg: #f6f7f4;
+  --bg-2: #eef0ec;
+  --surface: #ffffff;
+  --surface-2: #f1f3ef;
+  --ink: #1c2230;
+  --ink-2: #4a5468;
+  --ink-3: #5b6577;
+  --rule: #d6dae2;
+  --accent: #1f4e8c;
+  --accent-2: #2f66b0;
+  --accent-glow: rgba(31, 78, 140, 0.1);
+  --signal: #d1540f;
+  --signal-soft: rgba(209, 84, 15, 0.12);
+  --ok: #1f7a4d;
+  --warn: #8a5a00;
+  --paper: #ffffff;
+  --paper-ink: #1c2230;
+  color-scheme: light;
 }
 
 * {
@@ -46,27 +77,44 @@ html {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--ink);
   line-height: 1.6;
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
   transition: background 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+code, kbd, .mono {
+  font-family: var(--font-mono);
+}
+
+img, svg {
+  max-width: 100%;
 }
 
 a {
-  color: var(--accent-light);
+  color: var(--accent-2);
   text-decoration: none;
   transition: color 0.2s;
 }
 
 a:hover {
-  color: var(--gradient-end);
+  color: var(--signal);
 }
 
 ::selection {
   background: var(--accent);
-  color: white;
+  color: var(--bg);
 }
 
 ::-webkit-scrollbar {
@@ -74,11 +122,11 @@ a:hover {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-primary);
+  background: var(--bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--border);
+  background: var(--rule);
   border-radius: 4px;
 }
 
@@ -88,7 +136,7 @@ a:hover {
 
 /* Accessibility: focus styles */
 *:focus-visible {
-  outline: 2px solid var(--accent-light);
+  outline: 2px solid var(--signal);
   outline-offset: 2px;
 }
 
@@ -98,9 +146,9 @@ a:hover {
   top: -100px;
   left: 16px;
   background: var(--accent);
-  color: white;
+  color: var(--bg);
   padding: 8px 16px;
-  border-radius: 0 0 8px 8px;
+  border-radius: 0 0 6px 6px;
   z-index: 10000;
   font-size: 0.9rem;
   transition: top 0.2s;

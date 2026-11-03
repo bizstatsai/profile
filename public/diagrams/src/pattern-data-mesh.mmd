@@ -1,0 +1,27 @@
+%% id: pattern-data-mesh · level: pattern · visibility: public · owner: architect
+flowchart TB
+  subgraph DOMAINS["Domain teams own data products"]
+    direction LR
+    D1["Sales<br/>orders product"]
+    D2["Supply chain<br/>inventory product"]
+    D3["Finance<br/>ledger product"]
+  end
+  subgraph PLATFORM["Self-serve platform team"]
+    P1["Storage · compute · pipelines"]
+    P2["Catalogue · contracts · quality checks"]
+    P3["Access · observability"]
+  end
+  GOV["Federated governance council<br/>global policies, enforced by the platform"]
+  D1 -->|"publishes with a contract"| P2
+  D2 -->|"publishes with a contract"| P2
+  D3 -->|"publishes with a contract"| P2
+  D1 --> P1
+  D2 --> P1
+  D3 --> P1
+  GOV -->|"policies as code"| P2
+  GOV -->|"policies as code"| P3
+  C["Consumers<br/>analysts · ML · apps"] -->|"discover · subscribe"| P2
+  classDef dom fill:#e8f4fd,stroke:#2b7de9,color:#1a1a1a;
+  classDef plat fill:#efe9ff,stroke:#6c4fb5,color:#1a1a1a;
+  classDef gov fill:#fff4e0,stroke:#d58b00,color:#1a1a1a;
+  class D1,D2,D3 dom; class P1,P2,P3 plat; class GOV gov;

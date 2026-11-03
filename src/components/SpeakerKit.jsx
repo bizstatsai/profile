@@ -13,7 +13,7 @@ export default function SpeakerKit() {
           </p>
         </ScrollReveal>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))', gap: '24px' }}>
           {/* Bio */}
           <ScrollReveal>
             <div className="card" style={{ height: '100%' }}>

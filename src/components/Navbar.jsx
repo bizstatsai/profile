@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { navLinks } from '../data/profile'
+import { navGroups } from '../data/profile'
 import useTheme from '../hooks/useTheme'
 import '../App.css'
 
@@ -9,10 +9,21 @@ export default function Navbar() {
   const { theme, toggle } = useTheme()
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50)
+    const onScroll = () => setScrolled(window.scrollY > 40)
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  const toggleButton = (
+    <button
+      onClick={toggle}
+      aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+      className="btn btn-outline"
+      style={{ padding: '6px 10px', fontSize: '0.74rem', fontFamily: 'var(--font-mono)', letterSpacing: '0.06em' }}
+    >
+      {theme === 'dark' ? 'LIGHT' : 'DARK'}
+    </button>
+  )
 
   return (
     <nav
@@ -24,116 +35,84 @@ export default function Navbar() {
         left: 0,
         right: 0,
         zIndex: 1000,
-        padding: '16px 0',
-        background: scrolled
-          ? (theme === 'dark' ? 'rgba(10, 10, 15, 0.9)' : 'rgba(248, 249, 252, 0.9)')
-          : 'transparent',
-        backdropFilter: scrolled ? 'blur(20px)' : 'none',
-        borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
-        transition: 'all 0.3s ease',
+        padding: '12px 0',
+        background: scrolled || menuOpen ? 'color-mix(in srgb, var(--bg) 88%, transparent)' : 'transparent',
+        backdropFilter: scrolled || menuOpen ? 'blur(16px)' : 'none',
+        borderBottom: scrolled ? '1px solid var(--rule)' : '1px solid transparent',
+        transition: 'background 0.3s ease, border-color 0.3s ease',
       }}
     >
-      <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px' }}>
         <a href="#" aria-label="Go to top" style={{
-          fontSize: '1.3rem',
-          fontWeight: 700,
-          background: 'linear-gradient(135deg, var(--gradient-start), var(--gradient-end))',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          fontFamily: "'JetBrains Mono', monospace",
+          fontFamily: 'var(--font-mono)',
+          fontSize: '0.86rem',
+          fontWeight: 500,
+          letterSpacing: '0.06em',
+          color: 'var(--ink)',
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '10px',
         }}>
-          SC
+          <span aria-hidden="true" style={{ width: '10px', height: '10px', background: 'var(--signal)', display: 'inline-block' }} />
+          S. CENTHALA
         </a>
 
-        <div style={{ display: 'flex', gap: '32px', alignItems: 'center' }} className="desktop-nav">
-          {navLinks.map(link => (
-            <a key={link.href} href={link.href} style={{
-              color: 'var(--text-secondary)',
-              fontSize: '0.9rem',
-              fontWeight: 500,
-              transition: 'color 0.2s',
-            }}
-              onMouseEnter={e => e.target.style.color = 'var(--accent-light)'}
-              onMouseLeave={e => e.target.style.color = 'var(--text-secondary)'}
-            >
-              {link.label}
-            </a>
+        <div className="desktop-nav" style={{ display: 'flex', gap: '22px', alignItems: 'center' }}>
+          {navGroups.map(group => (
+            <div key={group.label} style={{ display: 'flex', alignItems: 'baseline', gap: '12px' }}>
+              <span style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.66rem',
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                color: 'var(--ink-3)',
+              }}>{group.label}</span>
+              {group.links.map(link => (
+                <a key={link.href} href={link.href} style={{ color: 'var(--ink-2)', fontSize: '0.86rem', fontWeight: 500, whiteSpace: 'nowrap' }}>
+                  {link.label}
+                </a>
+              ))}
+            </div>
           ))}
-
-          {/* Theme toggle */}
-          <button
-            onClick={toggle}
-            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-            style={{
-              background: 'var(--bg-card)',
-              border: '1px solid var(--border)',
-              borderRadius: '8px',
-              padding: '6px 10px',
-              cursor: 'pointer',
-              fontSize: '1rem',
-              lineHeight: 1,
-              transition: 'all 0.2s',
-            }}
-          >
-            {theme === 'dark' ? '\u2600\uFE0F' : '\u{1F319}'}
-          </button>
+          {toggleButton}
         </div>
 
-        {/* Mobile controls */}
-        <div style={{ display: 'none', gap: '12px', alignItems: 'center' }} className="mobile-controls">
-          <button
-            onClick={toggle}
-            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-            style={{
-              background: 'var(--bg-card)',
-              border: '1px solid var(--border)',
-              borderRadius: '8px',
-              padding: '6px 10px',
-              cursor: 'pointer',
-              fontSize: '1rem',
-              lineHeight: 1,
-            }}
-          >
-            {theme === 'dark' ? '\u2600\uFE0F' : '\u{1F319}'}
-          </button>
+        <div className="mobile-controls" style={{ display: 'none', gap: '10px', alignItems: 'center' }}>
+          {toggleButton}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle navigation menu"
             aria-expanded={menuOpen}
-            style={{
-              background: 'none',
-              border: 'none',
-              color: 'var(--text-primary)',
-              fontSize: '1.5rem',
-              cursor: 'pointer',
-            }}
+            className="btn btn-outline"
+            style={{ padding: '6px 10px', fontSize: '0.74rem', fontFamily: 'var(--font-mono)', letterSpacing: '0.06em' }}
           >
-            {menuOpen ? '\u2715' : '\u2630'}
+            {menuOpen ? 'CLOSE' : 'MENU'}
           </button>
         </div>
       </div>
 
       {menuOpen && (
-        <div style={{
-          padding: '20px 24px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '16px',
-          background: theme === 'dark' ? 'rgba(10, 10, 15, 0.95)' : 'rgba(248, 249, 252, 0.95)',
-          backdropFilter: 'blur(20px)',
-        }}>
-          {navLinks.map(link => (
-            <a key={link.href} href={link.href}
-              onClick={() => setMenuOpen(false)}
-              style={{ color: 'var(--text-secondary)', fontSize: '1rem' }}>
-              {link.label}
-            </a>
+        <div className="container" style={{ padding: '18px 20px 22px', display: 'grid', gap: '16px' }}>
+          {navGroups.map(group => (
+            <div key={group.label}>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.66rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--ink-3)', marginBottom: '6px' }}>
+                {group.label}
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 18px' }}>
+                {group.links.map(link => (
+                  <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)}
+                    style={{ color: 'var(--ink)', fontSize: '1rem' }}>
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       )}
 
       <style>{`
-        @media (max-width: 768px) {
+        @media (max-width: 960px) {
           .desktop-nav { display: none !important; }
           .mobile-controls { display: flex !important; }
         }

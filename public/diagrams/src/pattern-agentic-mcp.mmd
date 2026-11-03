@@ -1,0 +1,21 @@
+%% id: pattern-agentic-mcp · level: pattern · visibility: public · owner: architect
+flowchart LR
+  U["User or system<br/>chat · API · event"] --> ORC["Orchestrator<br/>plans · routes · stops"]
+  ORC --> A1["Knowledge agent"]
+  ORC --> A2["Conversation agent"]
+  ORC --> A3["Quality agent<br/>scores · rejects"]
+  A1 --> GW
+  A2 --> GW
+  GW["MCP gateway<br/>per-tool allowlist · per-tenant scope<br/>rate limits · audit"]
+  GW --> T1["Tool: CRM"]
+  GW --> T2["Tool: calendar"]
+  GW --> T3["Tool: payments"]
+  GW --> T4["Tool: knowledge base"]
+  ORC -->|"low confidence"| H["Human handoff<br/>context packet"]
+  GW -.-> AUD["Audit log · telemetry"]
+  ORC -.-> LLM["LLM router<br/>local first, API fallback"]
+  classDef agent fill:#e8f4fd,stroke:#2b7de9,color:#1a1a1a;
+  classDef gate fill:#fff4e0,stroke:#d58b00,color:#1a1a1a;
+  classDef tool fill:#f0f0f0,stroke:#666,color:#1a1a1a;
+  classDef human fill:#fdecea,stroke:#c0392b,color:#1a1a1a;
+  class ORC,A1,A2,A3,LLM agent; class GW,AUD gate; class T1,T2,T3,T4 tool; class H human;

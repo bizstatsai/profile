@@ -1,0 +1,13 @@
+%% id: pattern-llm-router · level: pattern · visibility: public · owner: architect
+flowchart LR
+  C["Caller<br/>agent · service"] -->|"OpenAI-shaped request"| R["LLM router<br/>fallback order is configuration"]
+  R -->|"1 · free, sovereign"| L["Local model<br/>GPU node"]
+  R -->|"2 · cheapest API"| P1["Provider A"]
+  R -->|"3"| P2["Provider B"]
+  R -->|"4"| P3["Provider C"]
+  R -->|"all failed → one 502"| C
+  R -.-> M["Cost + quality telemetry<br/>per provider"]
+  classDef core fill:#e8f4fd,stroke:#2b7de9,color:#1a1a1a;
+  classDef local fill:#e8ffe8,stroke:#2b9e2b,color:#1a1a1a;
+  classDef ext fill:#f0f0f0,stroke:#666,color:#1a1a1a;
+  class C,R core; class L local; class P1,P2,P3 ext; class M core;

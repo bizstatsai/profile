@@ -4,7 +4,7 @@ import {
   services, clients, caseStudies, faqItems, techRadar,
   servicesDetail, speakingTopics, navLinks, methodology,
   maturityPyramid, architecturePatterns, thoughtLeadership,
-  speakerKit, socialLinks,
+  speakerKit, socialLinks, products,
 } from '../data/profile'
 
 describe('profile data', () => {
@@ -114,11 +114,24 @@ describe('profile data', () => {
     expect(levelNums).toEqual([5, 4, 3, 2, 1])
   })
 
-  it('has 6 architecture patterns', () => {
-    expect(architecturePatterns).toHaveLength(6)
+  it('has 10 architecture patterns in the pattern-language form', () => {
+    expect(architecturePatterns).toHaveLength(10)
     architecturePatterns.forEach(p => {
-      expect(p.layers.length).toBeGreaterThan(0)
-      expect(p.tags.length).toBeGreaterThan(0)
+      expect(p.slug).toBeTruthy()
+      expect(p.intent).toBeTruthy()
+      expect(p.forces).toBeTruthy()
+      expect(p.consequences).toBeTruthy()
+      expect(p.knownUses.length).toBeGreaterThan(0)
+      expect(p.diagram).toMatch(/^pattern-[a-z-]+$/)
+      p.related.forEach(r => expect(architecturePatterns.find(x => x.slug === r)).toBeTruthy())
+    })
+  })
+
+  it('has every pattern diagram rendered in public/diagrams', async () => {
+    const fs = await import('node:fs')
+    architecturePatterns.forEach(p => {
+      expect(fs.existsSync(`public/diagrams/${p.diagram}.svg`)).toBe(true)
+      expect(fs.existsSync(`public/diagrams/src/${p.diagram}.mmd`)).toBe(true)
     })
   })
 
@@ -137,5 +150,30 @@ describe('profile data', () => {
   it('has social links', () => {
     expect(socialLinks.linkedin).toContain('linkedin.com')
     expect(socialLinks.github).toContain('github.com')
+  })
+})
+
+describe('products data', () => {
+  it('has 13 products with the required fields', () => {
+    expect(products).toHaveLength(13)
+    products.forEach(p => {
+      expect(p.name).toBeTruthy()
+      expect(p.tagline).toBeTruthy()
+      expect(p.description).toBeTruthy()
+      expect(['live', 'early', 'building', 'soon']).toContain(p.status)
+      expect(p.platform).toBeTruthy()
+      expect(p.tags.length).toBeGreaterThan(0)
+      if (p.url) expect(p.url).toMatch(/^https:\/\/[a-z.]+bizstats\.ai/)
+    })
+  })
+
+  it('lists the live products and links them', () => {
+    const live = products.filter(p => p.status === 'live').map(p => p.name)
+    expect(live).toEqual(expect.arrayContaining(['BotNX', 'BizStats Hub', 'BizStats Labs', 'Status', 'bizstats.ai']))
+    products.filter(p => p.status === 'live').forEach(p => expect(p.url).toBeTruthy())
+  })
+
+  it('has a Products nav link', () => {
+    expect(navLinks.find(l => l.href === '#products')).toBeTruthy()
   })
 })

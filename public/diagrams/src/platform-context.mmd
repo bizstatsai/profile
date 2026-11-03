@@ -1,0 +1,86 @@
+flowchart LR
+  subgraph PEOPLE["People"]
+    direction TB
+    P1["Customer on a client website<br/>chats with the BotNX widget"]
+    P2["Visitor / lead<br/>marketing site, Labs, status page"]
+    P3["Account owner<br/>signs in at the Hub, pays, launches products"]
+    P4["Partner / consultant<br/>KOU ecosystem"]
+    P5["Engineer<br/>merges to main, promotes releases"]
+  end
+
+  subgraph CF["Edge (CDN + DNS + WAF)"]
+    direction TB
+    DNS["DNS + TLS + WAF<br/>edge identity header to origin"]
+    T1["Primary tunnel<br/>→ self-hosted cluster"]
+    T2["Failover tunnel<br/>→ cloud standby"]
+    WK["Edge workers<br/>maintenance page · DR monitor"]
+    R2["Object storage<br/>media · static site · backups"]
+  end
+
+  subgraph SELF["Self-hosted Kubernetes · primary site"]
+    direction TB
+    HUB["BizStats Hub<br/>SSO · billing · launchpad"]
+    PROD["bizstats.ai production<br/>API gateway · domain services · web · site · workers"]
+    STG["Staging<br/>scale-to-zero, wakes on first request"]
+    SHARED["Shared platform tier<br/>Postgres + pgvector · Redis · LLM router · 6 more services"]
+    OLL["Local models (GPU node)<br/>LLM · speech"]
+    OTHER["BotNX · Labs · DeployNX · BlogNX · widgets"]
+  end
+
+  subgraph CLOUD["Cloud (managed)"]
+    VAULT["Secrets vault"]
+    STATUS["Status page"]
+    DRPG["Postgres hot standby"]
+  end
+
+  subgraph EXT["External services"]
+    direction TB
+    STRIPE["Stripe<br/>plans · Stripe Connect"]
+    LLM["LLM providers<br/>OpenAI · Anthropic · Google · DeepSeek · Groq · Fireworks · HF"]
+    MAIL["Transactional email"]
+    DATA["Market data<br/>SEC EDGAR · news · quotes"]
+    GH["CI/CD<br/>GitHub Actions, self-hosted runners"]
+    CAL["Google / Outlook calendars"]
+  end
+
+  P1 -->|"widget script tag"| DNS
+  P2 --> DNS
+  P3 --> DNS
+  P4 --> DNS
+  P5 -->|"merge → pipeline"| GH
+  DNS --> T1
+  DNS -.->|"on failover"| T2
+  DNS --> WK
+  DNS --> R2
+  DNS --> STATUS
+  T1 --> HUB
+  T1 --> PROD
+  T1 --> STG
+  T1 --> OTHER
+  PROD --> SHARED
+  HUB --> SHARED
+  OTHER --> SHARED
+  PROD --> OLL
+  OTHER --> OLL
+  SHARED -->|"streaming replication"| DRPG
+  PROD -.->|"short-lived credentials at deploy"| VAULT
+  HUB --> STRIPE
+  OTHER --> STRIPE
+  SHARED --> LLM
+  OTHER --> CAL
+  PROD --> MAIL
+  STATUS --> MAIL
+  PROD --> DATA
+  GH -->|"build · test · apply"| PROD
+  GH --> STG
+
+  classDef person fill:#fdecea,stroke:#c0392b,color:#1a1a1a;
+  classDef edge fill:#fff4e0,stroke:#d58b00,color:#1a1a1a;
+  classDef self fill:#e8f4fd,stroke:#2b7de9,color:#1a1a1a;
+  classDef cloud fill:#e8ffe8,stroke:#2b9e2b,color:#1a1a1a;
+  classDef ext fill:#f0f0f0,stroke:#666,color:#1a1a1a;
+  class P1,P2,P3,P4,P5 person;
+  class DNS,T1,T2,WK,R2 edge;
+  class HUB,PROD,STG,SHARED,OLL,OTHER self;
+  class VAULT,STATUS,DRPG cloud;
+  class STRIPE,LLM,MAIL,DATA,GH,CAL ext;

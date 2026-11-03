@@ -1,0 +1,12 @@
+%% id: pattern-streaming · level: pattern · visibility: public · owner: architect
+flowchart LR
+  P1["Producers<br/>apps · devices · CDC"] --> BUS["Event bus<br/>partitioned log · retained for replay"]
+  BUS --> SP["Stream processing<br/>enrich · window · aggregate"]
+  SP --> SV["Serving<br/>real-time views · alerts"]
+  SV --> ACT["Actions<br/>dashboards · decisions · agents"]
+  BUS -->|"replay"| BATCH["Batch reconciliation<br/>lakehouse"]
+  REG["Schema registry<br/>compatibility rules"] -.-> BUS
+  classDef flow fill:#e8f4fd,stroke:#2b7de9,color:#1a1a1a;
+  classDef gov fill:#fff4e0,stroke:#d58b00,color:#1a1a1a;
+  classDef out fill:#e8ffe8,stroke:#2b9e2b,color:#1a1a1a;
+  class P1,BUS,SP,SV,BATCH flow; class REG gov; class ACT out;

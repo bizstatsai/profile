@@ -6,7 +6,7 @@ Personal portfolio website for Srini Centhala - a Chief Data and AI Architect an
 ## Tech Stack
 - **Framework**: React 19 with Vite 5
 - **Styling**: CSS custom properties (CSS variables) with inline styles in components
-- **Fonts**: Inter (body) + JetBrains Mono (accents/code)
+- **Fonts**: Archivo (display) + IBM Plex Sans (body) + IBM Plex Mono (data, labels)
 - **Build**: Vite (dev server + production build)
 - **No routing library** - single-page with anchor scroll navigation
 
@@ -29,7 +29,7 @@ srini-profile/
 │   ├── App.jsx                         # Main app composing all sections
 │   ├── App.css                         # Shared utility classes (.section, .card, .btn, .tag)
 │   ├── data/
-│   │   └── profile.js                  # SINGLE SOURCE OF TRUTH for all content
+│   │   └── profile.js                  # SINGLE SOURCE OF TRUTH for all content (incl. products, patterns, navGroups)
 │   ├── hooks/                          # Custom React hooks (future)
 │   ├── utils/                          # Utility functions (future)
 │   └── components/
@@ -126,3 +126,8 @@ AI for Security, AI for Risk Management, OneStop Project Management
 - **Diagrams**: All `.mmd` files use Mermaid syntax — edit and preview at https://mermaid.live
 - **Certifications**: All have real credential URLs — preserve when updating
 - **Contact info**: Phone + email are real — do not expose unnecessarily in public deploys
+
+## Diagrams and public-safety rules
+- Every figure is rendered from `docs/diagrams/src/*.mmd` by `npm run diagrams` (mermaid-cli) into `public/diagrams/`; sources are copied next to the SVGs for "view source" links.
+- Nothing internal in public text or diagrams: no hostnames, addresses, ports, namespaces, cluster/tunnel names, secret paths, codenames, ticket ids, staff names. Label by role. See `docs/diagrams/README.md`.
+- Design decisions for the November 2026 redesign: `docs/redesign-2026.md`. Research and architecture blueprint: `docs/platform-blueprint-2026.md`.

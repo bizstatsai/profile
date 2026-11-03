@@ -1,0 +1,30 @@
+sequenceDiagram
+  autonumber
+  participant U as Users
+  participant LB as Edge load balancer<br/>pool A: self-host · pool B: cloud standby
+  participant HC as Health monitor<br/>GET /healthz every 60 s, 3 regions
+  participant A as Self-hosted k3s<br/>(primary)
+  participant B as Cloud standby k3s<br/>(KEDA, scaled low)
+  participant PGA as Postgres primary<br/>(shared platform tier)
+  participant PGB as Postgres standby<br/>(cloud, streaming + WAL archive)
+  participant W as Edge worker<br/>DR monitor + maintenance page
+
+  U->>LB: https://www.bizstats.ai
+  LB->>A: steer to pool A (healthy)
+  A->>PGA: reads/writes
+  PGA-->>PGB: WAL stream (RPO seconds)
+  Note over A: power / ISP / node failure
+  HC->>A: /healthz ×3 fail (~3 min)
+  HC->>LB: pool A unhealthy
+  LB->>W: notification webhook
+  W->>W: record state=failing_over
+  W->>LB: serve maintenance page for writes (≤10 min)
+  W->>PGB: pg_promote() after fencing A
+  PGB-->>W: promoted (read-write)
+  W->>B: scale gateway · auth · kou · insights to 1+
+  B->>PGB: reads/writes
+  HC->>B: /healthz ok
+  LB->>B: steer all traffic to pool B
+  U->>LB: requests continue
+  LB->>B: served from cloud (local models replaced by API providers)
+  Note over A,PGB: FAILBACK: restore A → re-sync PGA as replica of PGB → freeze writes 2 min → promote PGA → flip pool weights → PGB back to standby

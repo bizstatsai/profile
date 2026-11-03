@@ -1,0 +1,13 @@
+%% id: pattern-mlops · level: pattern · visibility: public · owner: architect
+flowchart LR
+  FS["Feature store<br/>offline + online"] --> TR["Training<br/>tracked experiments"]
+  TR --> REG["Model registry<br/>approval gate"]
+  REG --> SRV["Serving<br/>batch · online · local"]
+  SRV --> MON["Monitoring<br/>drift · latency · cost"]
+  MON -->|"retrain trigger"| TR
+  CI["CI/CD<br/>tests · lineage · rollback"] -.-> TR
+  CI -.-> REG
+  CI -.-> SRV
+  classDef step fill:#e8f4fd,stroke:#2b7de9,color:#1a1a1a;
+  classDef gov fill:#fff4e0,stroke:#d58b00,color:#1a1a1a;
+  class FS,TR,REG,SRV,MON step; class CI gov;

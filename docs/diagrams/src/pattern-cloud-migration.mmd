@@ -1,0 +1,10 @@
+%% id: pattern-cloud-migration · level: pattern · visibility: public · owner: architect
+flowchart LR
+  A["1 · Assess<br/>inventory · lineage · cost"] --> D["2 · Design<br/>target lakehouse · contracts"]
+  D --> M["3 · Migrate<br/>waves, each releasable"]
+  M --> V["4 · Validate<br/>dual-run reconciliation"]
+  V -->|"match"| X["5 · Decommission<br/>per wave"]
+  V -->|"mismatch"| M
+  classDef step fill:#e8f4fd,stroke:#2b7de9,color:#1a1a1a;
+  classDef gate fill:#fff4e0,stroke:#d58b00,color:#1a1a1a;
+  class A,D,M,X step; class V gate;
