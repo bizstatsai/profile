@@ -1,5 +1,6 @@
 import { books } from '../data/profile'
 import ScrollReveal from './ScrollReveal'
+import { asset } from '../lib/asset'
 import '../App.css'
 
 export default function Books() {
@@ -31,7 +32,7 @@ export default function Books() {
                 background: 'var(--bg-primary)',
               }}>
                 <img
-                  src={book.cover}
+                  src={asset(book.cover)}
                   alt={`Cover of ${book.title}`}
                   loading="lazy"
                   style={{

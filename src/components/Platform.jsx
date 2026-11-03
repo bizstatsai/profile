@@ -1,4 +1,5 @@
 import ScrollReveal from './ScrollReveal'
+import { asset } from '../lib/asset'
 import '../App.css'
 
 const FIGURES = [
@@ -30,10 +31,10 @@ export default function Platform() {
           {FIGURES.map((f, i) => (
             <ScrollReveal key={f.file} delay={i * 0.08}>
               <figure className="figure">
-                <img src={`/diagrams/${f.file}.svg`} alt={`${f.title}: ${f.claim}`} loading="lazy" />
+                <img src={asset(`/diagrams/${f.file}.svg`)} alt={`${f.title}: ${f.claim}`} loading="lazy" />
                 <figcaption>
                   <span><b style={{ color: 'var(--ink)' }}>{f.title}.</b> {f.claim}</span>
-                  <a href={`/diagrams/src/${f.file}.mmd`} target="_blank" rel="noopener noreferrer">view Mermaid source</a>
+                  <a href={asset(`/diagrams/src/${f.file}.mmd`)} target="_blank" rel="noopener noreferrer">view Mermaid source</a>
                 </figcaption>
               </figure>
             </ScrollReveal>

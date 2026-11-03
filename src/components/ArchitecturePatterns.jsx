@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { architecturePatterns } from '../data/profile'
 import ScrollReveal from './ScrollReveal'
+import { asset } from '../lib/asset'
 import '../App.css'
 
 const LAYERS = ['All', 'Data platform', 'AI & agents', 'Platform & operations']
@@ -73,13 +74,13 @@ export default function ArchitecturePatterns() {
 
             <figure className="figure" style={{ marginBottom: '20px' }}>
               <img
-                src={`/diagrams/${current.diagram}.svg`}
+                src={asset(`/diagrams/${current.diagram}.svg`)}
                 alt={`${current.title}: ${current.intent}`}
                 loading="lazy"
               />
               <figcaption>
                 <span>{current.layers.join(' → ')}</span>
-                <a href={`/diagrams/src/${current.diagram}.mmd`} target="_blank" rel="noopener noreferrer">view Mermaid source</a>
+                <a href={asset(`/diagrams/src/${current.diagram}.mmd`)} target="_blank" rel="noopener noreferrer">view Mermaid source</a>
               </figcaption>
             </figure>
 
