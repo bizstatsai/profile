@@ -4,7 +4,7 @@
 
 ```html
 <!-- Primary Meta -->
-<meta name="title" content="Srini Centhala - Data Architect & AI Leader">
+<meta name="title" content="Srini Centhala - Chief Data and AI Architect">
 <meta name="description" content="Seasoned data architect and technology leader specializing in AI-driven business solutions, enterprise architecture, and risk management. Founder of Bizstats.AI.">
 <meta name="keywords" content="data architect, AI, machine learning, enterprise architecture, cloud, Google Cloud, Bizstats.AI, Srini Centhala">
 <meta name="author" content="Srini Centhala">
@@ -13,14 +13,14 @@
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://srinicenthala.com/">
-<meta property="og:title" content="Srini Centhala - Data Architect & AI Leader">
+<meta property="og:title" content="Srini Centhala - Chief Data and AI Architect">
 <meta property="og:description" content="Seasoned data architect specializing in AI-driven business solutions. Author of 3 books on AI. Founder of Bizstats.AI.">
 <meta property="og:image" content="https://srinicenthala.com/og-image.png">
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:url" content="https://srinicenthala.com/">
-<meta property="twitter:title" content="Srini Centhala - Data Architect & AI Leader">
+<meta property="twitter:title" content="Srini Centhala - Chief Data and AI Architect">
 <meta property="twitter:description" content="Seasoned data architect specializing in AI-driven business solutions. Author of 3 books on AI.">
 <meta property="twitter:image" content="https://srinicenthala.com/og-image.png">
 
@@ -38,7 +38,7 @@
   "name": "Srini Centhala",
   "url": "https://srinicenthala.com",
   "image": "https://srinicenthala.com/avatar.jpg",
-  "jobTitle": "Founder & Chief Architect",
+  "jobTitle": "Founder & Chief Data and AI Architect",
   "worksFor": {
     "@type": "Organization",
     "name": "Bizstats.AI"

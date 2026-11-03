@@ -120,7 +120,7 @@
 - [x] Add sitemap.xml and robots.txt for SEO
 - [x] Lazy loading with React.lazy() + Suspense for 15 below-fold sections
 - [x] Performance optimization — code splitting (15 separate chunks, main bundle + lazy sections)
-- [x] Framer Motion page transitions (AnimatePresence + motion.main fade-in)
+- [x] Framer Motion page transitions (motion.main fade-in)
 - [x] Add PWA support (service worker, manifest.json)
 - [x] Add unit tests (Vitest + React Testing Library) — 23 tests (18 data + 5 component)
 
@@ -225,7 +225,7 @@
 - [x] FAQ expanded to 22 questions (Lakehouse, LLMs, ETL/ELT, streaming, Data Vault, cloud costs, governance, MCP, etc.)
 - [x] Lazy loading — React.lazy() + Suspense for 15 below-fold sections with spinner fallback
 - [x] Code splitting — 15 separate JS chunks for optimal loading
-- [x] Framer Motion — AnimatePresence + fade-in page transitions
+- [x] Framer Motion — motion.main fade-in page transitions
 - [x] Navigation updated (Methodology added to nav)
 - [x] Architecture flow diagrams added to all 5 case studies (step-by-step visual flows)
 - [x] Enterprise AI Maturity Pyramid — 5-level interactive pyramid (Foundation → Autonomous Intelligence)

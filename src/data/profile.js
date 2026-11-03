@@ -5,12 +5,12 @@
 
 export const profile = {
   name: 'Srini Centhala',
-  title: 'Data Architect | AI Architect | Cloud Architect',
+  title: 'Chief Data and AI Architect',
   company: 'Absolut-e Data Com, Inc.',
   companyUrl: 'https://www.absolut-e.com',
   product: 'BizStats AI',
   productUrl: 'https://www.bizstats.ai',
-  role: 'Founder & Chief Architect',
+  role: 'Founder & Chief Data and AI Architect',
   location: 'San Jose, California',
   phone: '678-570-6353',
   email: 'srini@absolut-e.com',
@@ -37,7 +37,7 @@ export const profile = {
 
 export const experiences = [
   {
-    role: 'Founder & Chief Architect',
+    role: 'Founder & Chief Data and AI Architect',
     company: 'Absolut-e Data Com / BizStats AI',
     location: 'San Jose, CA',
     period: 'Aug 2007 – Present',
