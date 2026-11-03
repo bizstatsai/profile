@@ -34,12 +34,12 @@ jobs:
         run: npm test
 
       - name: Choose the base path
-        # Root base for a custom domain (public/CNAME) or a user/organisation
-        # site repository (<owner>.github.io); otherwise GitHub serves a
-        # project site under /<repo>/.
+        # Root base for a custom domain (public/CNAME) or the owner's own
+        # user/organisation site repository (exactly <owner>.github.io);
+        # every other repository is a project site served under /<repo>/.
         run: |
           REPO="${GITHUB_REPOSITORY#*/}"
-          if [ -f public/CNAME ] || [[ "${REPO,,}" == *.github.io ]]; then
+          if [ -f public/CNAME ] || [ "${REPO,,}" = "${GITHUB_REPOSITORY_OWNER,,}.github.io" ]; then
             echo "VITE_BASE=/" >> "$GITHUB_ENV"
           else
             echo "VITE_BASE=/${REPO}/" >> "$GITHUB_ENV"
