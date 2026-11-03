@@ -1,7 +1,7 @@
 # Claude Code Context - Srini Centhala Portfolio
 
 ## Project Overview
-Personal portfolio website for Srini Centhala - a seasoned data architect, AI architect, and technology leader with 25+ years of experience consulting for Fortune 100 companies. The site showcases professional experience, published books, skills, certifications, and consulting services.
+Personal portfolio website for Srini Centhala - a Chief Data and AI Architect and technology leader with 25+ years of experience consulting for Fortune 100 companies. The site showcases professional experience, published books, skills, certifications, and consulting services.
 
 ## Tech Stack
 - **Framework**: React 19 with Vite 5
@@ -92,7 +92,7 @@ Data sourced from LinkedIn (linkedin.com/in/srinicenthala) + full resume.
 - **Phone**: 678-570-6353
 - **Email**: srini@absolut-e.com
 - **Companies**: Absolut-e Data Com Inc. (www.absolut-e.com) + BizStats AI (www.bizstats.ai)
-- **Role**: Founder & Chief Architect
+- **Role**: Founder & Chief Data and AI Architect
 - **Education**: B.E. Electronics, Bangalore University
 
 ### Key Clients (13 engagements shown)
