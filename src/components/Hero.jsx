@@ -1,4 +1,5 @@
 import { profile, clients } from '../data/profile'
+import { asset } from '../lib/asset'
 import '../App.css'
 
 const REVISION = '2026.11'
@@ -38,7 +39,7 @@ export default function Hero() {
               <a href="#patterns" className="btn btn-primary">See the patterns</a>
               <a href="#experience" className="btn btn-outline">View Experience</a>
               <a href="#contact" className="btn btn-outline">Get in Touch</a>
-              <a href="/Srini_Centhala_Resume.pdf" download className="btn btn-signal">Resume</a>
+              <a href={asset("/Srini_Centhala_Resume.pdf")} download className="btn btn-signal">Resume</a>
             </div>
 
             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
