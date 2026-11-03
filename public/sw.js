@@ -1,12 +1,15 @@
-const CACHE_NAME = 'srini-portfolio-v1'
+const CACHE_NAME = 'srini-portfolio-v2'
+// Resolve every precached URL against the worker's own location, so the same
+// file works at a domain root and under a GitHub Pages project path.
+const BASE = new URL('./', self.location.href).href
 const STATIC_ASSETS = [
-  '/',
-  '/favicon.svg',
-  '/favicon-32.png',
-  '/favicon-192.png',
-  '/og-image.png',
-  '/images/avatar-placeholder.svg',
-]
+  '',
+  'favicon.svg',
+  'favicon-32.png',
+  'favicon-192.png',
+  'og-image.png',
+  'images/avatar-placeholder.svg',
+].map((path) => new URL(path, BASE).href)
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
