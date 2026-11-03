@@ -43,7 +43,7 @@ export default function Products() {
           <h2 className="section-title">Products I Architect</h2>
           <p className="section-subtitle">
             The BizStats AI product family — {products.length} products, {live} in production, all running on a
-            self-hosted Kubernetes platform (Smart MCP) that my team designs, builds and operates.
+            self-hosted platform that my team designs, builds and operates.
           </p>
         </ScrollReveal>
 
@@ -82,7 +82,7 @@ export default function Products() {
                   fontFamily: "'JetBrains Mono', monospace",
                   color: 'var(--text-muted)',
                 }}>
-                  <span>Runs on {product.platform}</span>
+                  <span>{product.platform}</span>
                   {product.url ? (
                     <a
                       href={product.url}

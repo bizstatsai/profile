@@ -850,8 +850,8 @@ export const architecturePatterns = [
 
 /**
  * Product family built by the BizStats AI team. Copy, URLs and statuses come
- * from the product repositories (bizstatsai/bizstatsai product deck,
- * docs/BACKLOG.md, Cloudflare DNS inventory) as of 2026-11-03.
+ * from the product repositories as of 2026-11-03. No internal identifiers
+ * (hosts, ports, namespaces, codenames) are included on purpose.
  * status: 'live' | 'early' (early access / in testing) | 'building' | 'soon'
  */
 export const products = [
@@ -861,7 +861,7 @@ export const products = [
     description: 'A multi-agent customer surface that qualifies, books, collects payment, and hands off to a human with full context — across every channel. Five specialised agents (Knowledge, Conversation, Response, Quality, Handoff) over ten LLM providers; live in 25 industries.',
     url: 'https://botnx.bizstats.ai',
     status: 'live',
-    platform: 'Smart MCP',
+    platform: 'BizStats platform',
     tags: ['Multi-agent', 'MCP', 'Stripe Connect', 'Calendar booking'],
   },
   {
@@ -870,25 +870,25 @@ export const products = [
     description: 'Identity and billing hub for every product — password, Google, Microsoft, Apple and passkey sign-in, Stripe-backed plans, and the launchpad that links BotNX, DeployNX, BlogNX, Labs and D3K.',
     url: 'https://hub.bizstats.ai',
     status: 'live',
-    platform: 'Smart MCP',
+    platform: 'BizStats platform',
     tags: ['SSO', 'Passkeys', 'OIDC', 'Billing'],
   },
   {
     name: 'DeployNX',
     tagline: 'Deploy and test control, as a product.',
-    description: 'Grew out of the standalone Smart TCS (Test Control Server) project: its own backend, React frontend and Terraform, OIDC sign-in through the Hub, and first-class GitLab and Bitbucket CI integration.',
+    description: 'Deployment and test-control platform with its own backend and React frontend, infrastructure as code, single sign-on through the Hub, and GitLab and Bitbucket CI integration.',
     url: 'https://deploynx.bizstats.ai',
     status: 'building',
-    platform: 'Smart MCP',
+    platform: 'BizStats platform',
     tags: ['CI/CD', 'Terraform', 'GitLab', 'Bitbucket'],
   },
   {
     name: 'BlogNX',
     tagline: 'Where ideas become public intelligence.',
-    description: 'Forty-seven AI agents, structured debate, four pillars of verified reputation. Publishing for work that deserves to be read instead of scrolled past. Media served from Cloudflare R2.',
+    description: 'Forty-seven AI agents, structured debate, four pillars of verified reputation. Publishing for work that deserves to be read instead of scrolled past.',
     url: 'https://blognx.bizstats.ai',
     status: 'early',
-    platform: 'Smart MCP',
+    platform: 'BizStats platform',
     tags: ['Editorial AI', 'Agents', 'R2'],
   },
   {
@@ -897,26 +897,26 @@ export const products = [
     description: 'A public workbench where beta tools ship while still rough: the Lumina Forge content engine, BizStats AI 2.0 conversational BI and the Data Studio pipeline builder. Local-first, Ollama-powered, cohort access.',
     url: 'https://labs.bizstats.ai',
     status: 'live',
-    platform: 'Smart MCP',
+    platform: 'BizStats platform',
     tags: ['Open beta', 'Local-first', 'Ollama'],
   },
   {
     name: 'Status',
     tagline: 'Every product, one health page.',
-    description: 'Public status page for the product family, backed by a status API on the k3s tunnel and transactional email through neuralfeed.',
+    description: 'Public status page for the product family, with a status API and email notifications.',
     url: 'https://status.bizstats.ai',
     status: 'live',
-    platform: 'Linode + k3s',
+    platform: 'BizStats platform',
     tags: ['Uptime', 'Incidents'],
   },
   {
     name: 'bizstats.ai',
     tagline: 'The decision platform.',
-    description: 'Six FastAPI services (KOU, business channels, analytics, departments, insights, auth) behind an nginx gateway, a Next.js product zone and a static marketing zone, Celery workers and a local Ollama model — 191 routes live in production.',
+    description: 'Six domain services (KOU, business channels, analytics, departments, insights, auth) behind an API gateway, a Next.js product zone and a static marketing zone, background workers and local-first models.',
     url: 'https://www.bizstats.ai',
     status: 'live',
-    platform: 'Self-hosted k3s',
-    tags: ['FastAPI', 'Next.js', 'Postgres + pgvector', 'KEDA'],
+    platform: 'BizStats platform',
+    tags: ['Domain services', 'Next.js', 'Postgres + pgvector', 'Scale-to-zero'],
   },
   {
     name: 'KOU',
@@ -924,7 +924,7 @@ export const products = [
     description: 'The partner ecosystem and consulting arm: analysts, boutique firms and independent consultants carry the whole suite as their own practice — one catalogue, one commission, a workspace that runs the deal desk.',
     url: 'https://www.bizstats.ai/kou/plan',
     status: 'early',
-    platform: 'bizstats.ai',
+    platform: 'BizStats platform',
     tags: ['Partner program', 'Deal desk'],
   },
   {
@@ -933,7 +933,7 @@ export const products = [
     description: 'Decision Domain Knowledge: an open spec that compiles to dbt, Iceberg and Cube, plus a Cognitive Cache that stops agents re-thinking the same domain question.',
     url: 'https://www.bizstats.ai/d3k',
     status: 'early',
-    platform: 'bizstats.ai',
+    platform: 'BizStats platform',
     tags: ['dbt', 'Iceberg', 'Cube', 'Semantic cache'],
   },
   {
@@ -942,7 +942,7 @@ export const products = [
     description: 'Decisive Wisdom Studio: the Decision Card — versioned, bias-checked, audit-ready, outcome-attributed. The decision itself becomes the record, not the meeting that produced it.',
     url: 'https://www.bizstats.ai/dws',
     status: 'early',
-    platform: 'bizstats.ai',
+    platform: 'BizStats platform',
     tags: ['Decision records', 'Audit'],
   },
   {
@@ -951,7 +951,7 @@ export const products = [
     description: 'Decision Process Monitoring: self-healing pipelines, inference economics and EU AI Act audit for the AI-native data stack — and it drafts the fix.',
     url: 'https://www.bizstats.ai/dpms',
     status: 'early',
-    platform: 'bizstats.ai',
+    platform: 'BizStats platform',
     tags: ['Observability', 'FinOps', 'EU AI Act'],
   },
   {
@@ -960,16 +960,16 @@ export const products = [
     description: 'A three-dimensional command surface where every decision orbits the person who owns it. Thirteen AI executives, one 3D mind. Private preview; public release 2026.',
     url: 'https://www.bizstats.ai/cosmos3d/universe',
     status: 'soon',
-    platform: 'bizstats.ai',
+    platform: 'BizStats platform',
     tags: ['3D', 'Executive AI'],
   },
   {
     name: 'CRM',
     tagline: 'The pipeline behind the pipeline.',
-    description: 'Internal CRM for the product family (the crm-bizstats project), sharing the Smart MCP data plane. Planned public home: crm.bizstats.ai.',
+    description: 'Internal CRM for the product family on the shared platform. Planned public home: crm.bizstats.ai.',
     url: null,
     status: 'building',
-    platform: 'Smart MCP',
+    platform: 'BizStats platform',
     tags: ['Internal', 'Pipeline'],
   },
 ]
