@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -47,7 +47,7 @@ const fadeIn = {
 
 export default function App() {
   return (
-    <AnimatePresence>
+    <>
       <a href="#main-content" className="skip-link">Skip to main content</a>
       <Navbar />
       <motion.main id="main-content" {...fadeIn}>
@@ -73,6 +73,6 @@ export default function App() {
           <Footer />
         </Suspense>
       </motion.main>
-    </AnimatePresence>
+    </>
   )
 }
