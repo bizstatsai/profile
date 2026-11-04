@@ -1,5 +1,7 @@
 # Backlog - Srini Centhala Portfolio
 
+**Co-Author**: Srini Centhala, srini@absolut-e.com, Chief Data and AI Architect
+
 **Repo**: https://github.com/Scenthala/profile
 **Stack**: React 19 + Vite 5 | Dark/Light theme | Deployed: TBD
 **Gap Analysis**: `docs/gap-analysis.md` (vs. top 15 influencers)

@@ -1,5 +1,7 @@
 # Architecture - Srini Centhala Portfolio
 
+**Co-Author**: Srini Centhala, srini@absolut-e.com, Chief Data and AI Architect
+
 ## Architecture Overview
 
 Single-page application (SPA) built with React + Vite. No server-side rendering or backend. Static site that can be deployed to any CDN (Vercel, Netlify, GitHub Pages, Cloudflare Pages).

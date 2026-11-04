@@ -1,5 +1,7 @@
 # Accessibility Guidelines (a11y)
 
+**Co-Author**: Srini Centhala, srini@absolut-e.com, Chief Data and AI Architect
+
 ## WCAG 2.1 AA Compliance Checklist
 
 ### Color Contrast

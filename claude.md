@@ -1,5 +1,7 @@
 # Claude Code Context - Srini Centhala Portfolio
 
+**Co-Author**: Srini Centhala, srini@absolut-e.com, Chief Data and AI Architect
+
 Last updated: 2026-11-04
 
 ## Project Overview

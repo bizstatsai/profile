@@ -1,5 +1,7 @@
 # Contact Form API Specification
 
+**Co-Author**: Srini Centhala, srini@absolut-e.com, Chief Data and AI Architect
+
 ## Overview
 Specification for the contact form backend integration (future feature).
 

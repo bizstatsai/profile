@@ -1,5 +1,7 @@
 # Site redesign, November 2026
 
+**Co-Author**: Srini Centhala, srini@absolut-e.com, Chief Data and AI Architect
+
 The portfolio was rebuilt around one idea: the site is an architect's drawing register. Every
 section is a sheet; every figure is rendered from source; nothing on it depicts a client system
 or an internal identifier. This document records the decisions so the next change does not
