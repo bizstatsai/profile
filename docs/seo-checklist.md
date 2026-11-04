@@ -1,5 +1,7 @@
 # SEO & Meta Tags Checklist
 
+**Co-Author**: Srini Centhala, srini@absolut-e.com, Chief Data and AI Architect
+
 ## Head Meta Tags (to add to index.html)
 
 ```html

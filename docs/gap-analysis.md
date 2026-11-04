@@ -1,5 +1,7 @@
 # Gap Analysis: Srini Centhala vs. Top 15 Influencers
 
+**Co-Author**: Srini Centhala, srini@absolut-e.com, Chief Data and AI Architect
+
 ## Scoring Matrix
 
 | Dimension | Srini | Top Influencers (Avg) | Gap |

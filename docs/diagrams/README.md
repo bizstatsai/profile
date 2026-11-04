@@ -1,5 +1,7 @@
 # Diagrams
 
+**Co-Author**: Srini Centhala, srini@absolut-e.com, Chief Data and AI Architect
+
 Every diagram on the site is rendered from a Mermaid source in `docs/diagrams/src/`.
 Nothing is drawn by hand and nothing is pasted as a screenshot.
 

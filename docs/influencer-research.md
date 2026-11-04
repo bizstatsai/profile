@@ -1,5 +1,7 @@
 # Top Profiles, Influencers & Strategic Recommendations
 
+**Co-Author**: Srini Centhala, srini@absolut-e.com, Chief Data and AI Architect
+
 Research conducted for Srini Centhala's portfolio positioning.
 
 ---

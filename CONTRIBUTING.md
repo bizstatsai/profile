@@ -1,5 +1,7 @@
 # Contributing to Srini Centhala Portfolio
 
+**Co-Author**: Srini Centhala, srini@absolut-e.com, Chief Data and AI Architect
+
 ## Getting Started
 
 ```bash

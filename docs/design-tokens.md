@@ -1,5 +1,7 @@
 # Design Tokens
 
+**Co-Author**: Srini Centhala, srini@absolut-e.com, Chief Data and AI Architect
+
 Reference for all design tokens used across the portfolio. Defined as CSS custom properties in `src/index.css`.
 
 ## Colors

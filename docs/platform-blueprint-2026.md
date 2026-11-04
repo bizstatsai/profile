@@ -1,5 +1,7 @@
 # BizStats Platform Blueprint (November 2026)
 
+**Co-Author**: Srini Centhala, srini@absolut-e.com, Chief Data and AI Architect
+
 Condensed, public-safe copy of the report published on 2026-11-03. The full version with
 all figures, evidence tags and 87 numbered sources is the "BizStats Platform Blueprint"
 artifact. This file keeps the decisions, the tables and the diagram sources so the repository
