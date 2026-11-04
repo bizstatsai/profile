@@ -27,7 +27,7 @@ profile/
 ├── public/
 │   ├── diagrams/                       # Rendered SVG per diagram; src/ holds the Mermaid sources
 │   ├── images/                         # Book covers and other static images
-│   ├── sw.js                           # Service worker (kill switch and cache, relative URLs)
+│   ├── sw.js                           # Service worker (caches assets for repeat visits, relative URLs)
 │   ├── manifest.json                   # PWA manifest (relative URLs)
 │   └── og-image.png, favicon-*.png, robots.txt, sitemap.xml
 ├── scripts/
@@ -107,7 +107,7 @@ Contact details in the data file are real. Do not add more personal contact deta
 
 ## Key Architecture Decisions
 - **Single data file**: components import from `src/data/profile.js`. New content goes there first.
-- **Base-path safe**: the Vite base comes from `VITE_BASE`. Build any public path with `asset()` from `src/lib/asset.js`. Never hard-code a leading `/`.
+- **Base-path safe**: the Vite base comes from `VITE_BASE`. Wrap every public path in `asset()` from `src/lib/asset.js`, and keep the leading slash inside the call, as in `asset('/diagrams/x.svg')`. `asset()` adds the base path in front of that slash. Never write a base-path prefix by hand.
 - **Deploy base**: the workflow uses `/` for a `<owner>.github.io` repository or when `public/CNAME` exists, and `/<repo>/` otherwise.
 - **PWA**: `sw.js`, the manifest and the registration all use relative URLs, so the app works under either base.
 - **Diagrams are rendered, never drawn by hand**: every figure comes from a Mermaid source in `docs/diagrams/src/`, rendered by `npm run diagrams`. Each source starts with an id header. See `docs/diagrams/README.md`.
@@ -138,5 +138,5 @@ Contact details in the data file are real. Do not add more personal contact deta
 ## Open items
 - `public/Srini_Centhala_Resume.pdf` is linked from the hero and tested for, but the file is not in the repository.
 - The contact form posts to a Formspree placeholder id in `src/components/Contact.jsx`. Replace it before relying on the form.
-- Three diagram sources lack the id header line: `platform-context`, `platform-release-path` and `pattern-pilot-light-failover`.
+- Four diagram sources lack the id header line: `platform-context`, `platform-release-path`, `pattern-pilot-light-failover` and `pattern-availability-states`.
 - A custom domain needs `public/CNAME`. The deploy workflow already switches the base path when that file exists.
