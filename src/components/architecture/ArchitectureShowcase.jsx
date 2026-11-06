@@ -15,7 +15,18 @@ const readHash = () => {
   return match ? { slug: match[1], node: match[2] ? decodeURIComponent(match[2]) : null } : null
 }
 
-function PlateFacts({ plate }) {
+export function PlateRing({ plate }) {
+  if (!plate.ring) return null
+  return (
+    <p className="plate__ring tech">
+      <span>{plate.layer}</span>
+      <a href="#radar" data-ring={plate.ring} title={ringOf(plate.ring)?.description}>{ringOf(plate.ring)?.ring ?? plate.ring}</a>
+    </p>
+  )
+}
+
+/** Related patterns open their plate; inside the catalogue, onRelated keeps the reader there instead. */
+export function PlateFacts({ plate, onRelated }) {
   if (!plate.forces) return null
   return (
     <dl className="plate__facts">
@@ -41,7 +52,16 @@ function PlateFacts({ plate }) {
         <dt>Related patterns</dt>
         <dd>
           <ul className="plate__related">
-            {plate.related.map(slug => <li key={slug}><a href={`#plate-${slug}`}>{titleOf(slug)}</a></li>)}
+            {plate.related.map(slug => (
+              <li key={slug}>
+                <a
+                  href={`#plate-${slug}`}
+                  onClick={onRelated && ((e) => { e.preventDefault(); onRelated(slug) })}
+                >
+                  {titleOf(slug)}
+                </a>
+              </li>
+            ))}
           </ul>
         </dd>
       </div>
@@ -60,12 +80,7 @@ function Plate({ plate, number, active, node }) {
   return (
     <article id={`plate-${plate.slug}`} className="plate" hidden={!active} aria-labelledby={`plate-${plate.slug}-title`}>
       <header className="plate__head">
-        {plate.ring && (
-          <p className="plate__ring tech">
-            <span>{plate.layer}</span>
-            <a href="#radar" data-ring={plate.ring} title={ringOf(plate.ring)?.description}>{ringOf(plate.ring)?.ring ?? plate.ring}</a>
-          </p>
-        )}
+        <PlateRing plate={plate} />
         <h3 id={`plate-${plate.slug}-title`}>{plate.title}</h3>
         <p className="plate__intent">{plate.intent}</p>
         <p className="plate__status tech">{STATUS[diagram.status].note}</p>

@@ -1,6 +1,7 @@
 import { architectureChapters, governanceIndex } from '../data/architecturePatterns'
 import { SectionHead } from '../components/layout/SectionContainer'
 import ArchitectureShowcase from '../components/architecture/ArchitectureShowcase'
+import PatternCatalogue from '../components/architecture/PatternCatalogue'
 
 export default function ArchitectureSection() {
   return (
@@ -38,6 +39,8 @@ export default function ArchitectureSection() {
           ))}
         </ul>
       </aside>
+
+      <PatternCatalogue />
     </>
   )
 }

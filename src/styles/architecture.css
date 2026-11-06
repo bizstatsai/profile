@@ -227,6 +227,251 @@
   margin-top: 6px;
 }
 
+/* Pattern catalogue: a register of every pattern beside the sheet of the one that is open. */
+.catalogue {
+  margin-top: clamp(64px, 8vw, 120px);
+  padding-top: clamp(30px, 3.6vw, 48px);
+  border-top: 1px solid var(--line-2);
+}
+
+.catalogue__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 22px 48px;
+  margin-bottom: clamp(22px, 2.6vw, 34px);
+}
+
+.catalogue__head h3 {
+  margin-bottom: 12px;
+  font-size: var(--text-xl);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+}
+
+.catalogue__head p {
+  max-width: 62ch;
+  font-size: var(--text-sm);
+}
+
+/* Hairlines between the filters come from the 1px gap over the border colour. */
+.catalogue__filter {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 1px;
+  background: var(--line-2);
+  border: 1px solid var(--line-2);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.catalogue__filter button {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+  white-space: nowrap;
+  background: var(--bg);
+  transition: color 0.2s, background 0.2s;
+}
+
+.catalogue__filter button .tech {
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+}
+
+.catalogue__filter button:hover {
+  color: var(--ink);
+}
+
+.catalogue__filter button[aria-pressed='true'] {
+  color: var(--ink);
+  background: var(--surface);
+  box-shadow: inset 0 -2px 0 var(--c, var(--violet));
+}
+
+.catalogue__filter button:focus-visible {
+  outline-offset: -3px;
+}
+
+/* The register fills the left column; the sheet spans every row of it, and a last
+   flexible row takes up the sheet's extra height so the items stay their own size. */
+.catalogue__body {
+  display: grid;
+  grid-template-columns: minmax(272px, 0.32fr) minmax(0, 1fr);
+  grid-template-rows: repeat(var(--rows), auto) 1fr;
+  background: var(--bg-2);
+  border: 1px solid var(--line-2);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.catalogue__item {
+  grid-column: 1;
+  display: grid;
+  grid-template-columns: 2.6em minmax(0, 1fr);
+  gap: 6px 8px;
+  align-items: baseline;
+  padding: 16px 20px 16px 18px;
+  text-align: left;
+  color: var(--ink-2);
+  border-bottom: 1px solid var(--line);
+  transition: color 0.2s, background 0.2s;
+}
+
+.catalogue__item:hover {
+  color: var(--ink);
+  background: color-mix(in srgb, var(--c) 7%, transparent);
+}
+
+.catalogue__item[aria-expanded='true'] {
+  position: relative;
+  z-index: 1;
+  margin-right: -1px;
+  color: var(--ink);
+  background: var(--surface);
+  box-shadow: inset 3px 0 0 var(--c);
+}
+
+.catalogue__item:focus-visible {
+  outline-offset: -3px;
+}
+
+.catalogue__no {
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+}
+
+.catalogue__name {
+  font-size: var(--text-md);
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.catalogue__meta {
+  grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+}
+
+.catalogue__layer {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.catalogue__meta svg {
+  flex: none;
+  fill: color-mix(in srgb, var(--c) 22%, transparent);
+  stroke: var(--c);
+  stroke-width: 1.2;
+}
+
+.catalogue__trial {
+  padding: 0 6px;
+  color: color-mix(in srgb, var(--cat-governance) 85%, var(--ink));
+  border: 1px solid currentColor;
+  border-radius: 3px;
+}
+
+.catalogue__sheet {
+  grid-column: 2;
+  grid-row: 1 / -1;
+  min-width: 0;
+  padding: clamp(24px, 3vw, 40px);
+  background: var(--surface);
+  border-left: 1px solid var(--line-2);
+}
+
+.catalogue__sheet h4 {
+  margin-bottom: 12px;
+  font-size: var(--text-xl);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.catalogue__flow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px 24px;
+  margin-top: 12px;
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+}
+
+.catalogue__sheet .plate__facts {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.catalogue__open {
+  display: inline-block;
+  margin-top: clamp(26px, 3vw, 38px);
+}
+
+@media (max-width: 900px) {
+  .catalogue__filter {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  /* On a phone the sheet opens under its own item. */
+  .catalogue__body {
+    display: block;
+  }
+
+  .catalogue__item {
+    width: 100%;
+  }
+
+  .catalogue__item[aria-expanded='true'] {
+    margin-right: 0;
+  }
+
+  .catalogue__sheet {
+    padding: 22px 18px 30px;
+    border-left: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .catalogue__filter button {
+    flex-wrap: wrap;
+    gap: 0 8px;
+    padding: 10px 8px;
+    white-space: normal;
+  }
+
+  .catalogue__sheet .plate__facts {
+    grid-template-columns: 1fr;
+  }
+
+  /* The item just above already names the pattern, so the sheet's heading is kept for screen readers only. */
+  .catalogue__sheet h4 {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 420px) {
+  .catalogue__filter button {
+    font-size: var(--text-xs);
+  }
+}
+
 /* A drawing ----------------------------------------------------------------- */
 .ac-card {
   min-width: 0;
