@@ -1,82 +1,68 @@
 import { lazy, Suspense } from 'react'
-import { motion } from 'framer-motion'
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import About from './components/About'
+import Header from './components/layout/Header'
+import SectionContainer from './components/layout/SectionContainer'
+import HeroSection from './components/hero/HeroSection'
+import ConceptSection from './sections/ConceptSection'
+import PhilosophySection from './sections/PhilosophySection'
 
-// Lazy load below-the-fold sections
-const Experience = lazy(() => import('./components/Experience'))
-const CaseStudies = lazy(() => import('./components/CaseStudies'))
-const Products = lazy(() => import('./components/Products'))
-const Platform = lazy(() => import('./components/Platform'))
-const Methodology = lazy(() => import('./components/Methodology'))
-const MaturityPyramid = lazy(() => import('./components/MaturityPyramid'))
-const Books = lazy(() => import('./components/Books'))
-const Skills = lazy(() => import('./components/Skills'))
-const TechRadar = lazy(() => import('./components/TechRadar'))
-const ArchitecturePatterns = lazy(() => import('./components/ArchitecturePatterns'))
-const Services = lazy(() => import('./components/Services'))
-const Certifications = lazy(() => import('./components/Certifications'))
-const Timeline = lazy(() => import('./components/Timeline'))
-const FAQ = lazy(() => import('./components/FAQ'))
-const ThoughtLeadership = lazy(() => import('./components/ThoughtLeadership'))
-const Speaking = lazy(() => import('./components/Speaking'))
-const SpeakerKit = lazy(() => import('./components/SpeakerKit'))
-const Contact = lazy(() => import('./components/Contact'))
-const Footer = lazy(() => import('./components/Footer'))
-
-function SectionFallback() {
-  return (
-    <div style={{ minHeight: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div style={{
-        width: '32px',
-        height: '32px',
-        border: '3px solid var(--border)',
-        borderTopColor: 'var(--accent)',
-        borderRadius: '50%',
-        animation: 'spin 0.8s linear infinite',
-      }} />
-      <style>{`@keyframes spin { to { transform: rotate(360deg) } }`}</style>
-    </div>
-  )
-}
-
-const fadeIn = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  transition: { duration: 0.3 },
-}
+const ArchitectureSection = lazy(() => import('./sections/ArchitectureSection'))
+const DataIntelligenceSection = lazy(() => import('./sections/DataIntelligenceSection'))
+const AISection = lazy(() => import('./sections/AISection'))
+const ExperienceTimeline = lazy(() => import('./components/timeline/ExperienceTimeline'))
+const ProjectShowcase = lazy(() => import('./components/projects/ProjectShowcase'))
+const PublicationLibrary = lazy(() => import('./components/publications/PublicationLibrary'))
+const CredentialsSection = lazy(() => import('./components/credentials/CredentialsSection'))
+const PrinciplesSection = lazy(() => import('./sections/PrinciplesSection'))
+const ContactSection = lazy(() => import('./sections/ContactSection'))
+const SiteArchive = lazy(() => import('./sections/SiteArchive'))
+const Footer = lazy(() => import('./components/layout/Footer'))
 
 export default function App() {
   return (
     <>
       <a href="#main-content" className="skip-link">Skip to main content</a>
-      <Navbar />
-      <motion.main id="main-content" {...fadeIn}>
-        <Hero />
-        <About />
-        <Suspense fallback={<SectionFallback />}>
-          <Products />
-          <ArchitecturePatterns />
-          <Platform />
-          <CaseStudies />
-          <Experience />
-          <Methodology />
-          <MaturityPyramid />
-          <Timeline />
-          <Books />
-          <ThoughtLeadership />
-          <FAQ />
-          <Skills />
-          <TechRadar />
-          <Certifications />
-          <Services />
-          <Speaking />
-          <SpeakerKit />
-          <Contact />
-          <Footer />
-        </Suspense>
-      </motion.main>
+      <Header />
+      <main id="main-content">
+        <HeroSection />
+        <div className="story">
+          <div className="through-line" aria-hidden="true"><span /></div>
+          <ConceptSection />
+          <SectionContainer id="philosophy" nav="philosophy" band>
+            <PhilosophySection />
+          </SectionContainer>
+          <SectionContainer id="architecture" nav="architecture">
+            <ArchitectureSection />
+          </SectionContainer>
+          <SectionContainer id="data-journey" nav="ai-data" band>
+            <DataIntelligenceSection />
+          </SectionContainer>
+          <SectionContainer id="ai" nav="ai-data">
+            <AISection />
+          </SectionContainer>
+          <SectionContainer id="journey" nav="journey" band>
+            <ExperienceTimeline />
+          </SectionContainer>
+          <SectionContainer id="projects" nav="projects">
+            <ProjectShowcase />
+          </SectionContainer>
+          <SectionContainer id="publications" nav="publications" band>
+            <PublicationLibrary />
+          </SectionContainer>
+          <SectionContainer id="recognition" nav="publications">
+            <CredentialsSection />
+          </SectionContainer>
+          <SectionContainer id="principles" nav="publications" band>
+            <PrinciplesSection />
+          </SectionContainer>
+          <SectionContainer id="contact" nav="contact">
+            <ContactSection />
+          </SectionContainer>
+        </div>
+      </main>
+      <Suspense fallback={null}>
+        <SiteArchive />
+        <Footer />
+      </Suspense>
     </>
   )
 }

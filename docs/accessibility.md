@@ -1,72 +1,36 @@
-# Accessibility Guidelines (a11y)
+# Accessibility
 
 **Co-Author**: Srini Centhala, srini@absolut-e.com, Chief Data and AI Architect
 
-## WCAG 2.1 AA Compliance Checklist
+The target is WCAG 2.1 AA. Check a change against this list, and run axe in both themes at desktop and phone widths.
 
-### Color Contrast
-- [ ] Text on `--bg-primary` (#0a0a0f): min 4.5:1 ratio
-- [ ] Text on `--bg-secondary` (#12121a): min 4.5:1 ratio
-- [ ] Text on `--bg-card` (#1a1a2e): min 4.5:1 ratio
-- [ ] Large text (18px+): min 3:1 ratio
-- [ ] Interactive elements: min 3:1 against adjacent colors
-- Current: `--text-primary` (#e8e8f0) on `--bg-primary` (#0a0a0f) = ~17:1 (passes)
-- Current: `--text-secondary` (#9898b0) on `--bg-primary` (#0a0a0f) = ~7:1 (passes)
+## Contrast
+- All text meets 4.5:1, and large text meets 3:1, in both themes. Tokens are in `docs/design-tokens.md`.
+- Colour is never the only signal. Each family on a drawing has a glyph, and dashed lines are named in the legend.
 
-### Keyboard Navigation
-- [ ] All interactive elements focusable via Tab
-- [ ] Visible focus indicators on all focusable elements
-- [ ] Skip-to-content link at top of page
-- [ ] Escape key closes mobile menu
-- [ ] Logical tab order matches visual order
+## Keyboard
+- A skip link leads to the main content.
+- Focus is always visible.
+- Tabs for chapters and journey stages use arrow keys and a roving tab index.
+- On a drawing, Tab reaches one component, arrow keys walk the rest, and Enter or Space selects. Each layer name is its own stop, and Enter or Space opens the layer.
+- On a drawing, `+`, `-` and `0` zoom and reset, and Shift with an arrow key pans.
+- Escape closes the phone menu and the full-screen view, which are native `dialog` elements.
 
-### Screen Readers
-- [ ] All images have descriptive alt text
-- [ ] Semantic HTML (nav, main, section, footer, h1-h6)
-- [ ] ARIA labels on icon-only buttons (hamburger menu)
-- [ ] ARIA landmarks for page regions
-- [ ] Live regions for dynamic content (form submissions)
+## Screen readers
+- One `h1`, then headings in order. Each section is a landmark named by its headline.
+- Decorative canvases and figures are `aria-hidden`. The lens drawing has a full text description.
+- Every drawing has a text version: "Read as text" lists its components and relationships, and sequences list their steps.
+- The inspector, stepper caption and form status are live regions.
+- The accessible name of a component matches its visible text.
 
-### Forms (Contact - Future)
-- [ ] All inputs have associated labels
-- [ ] Error messages linked to inputs via aria-describedby
-- [ ] Required fields indicated visually and programmatically
-- [ ] Form validation errors announced to screen readers
+## Forms
+- Every field has a visible label, and required fields use native validation.
+- The form's outcome is announced in a status region, and failure gives the email address.
 
-### Motion & Animation
-- [ ] Respect `prefers-reduced-motion` media query
-- [ ] No auto-playing animations that can't be paused
-- [ ] Scroll animations optional / degraded gracefully
+## Motion
+- Everything that moves on its own can be paused with Pause motion.
+- `prefers-reduced-motion` is respected before first paint: no entrances, no loops and no smooth scrolling.
+- There is no scroll hijacking, and the page keeps scrolling normally over a drawing until a visitor zooms in.
 
-### Implementation
-```css
-/* Add to index.css */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* Focus styles */
-*:focus-visible {
-  outline: 2px solid var(--accent-light);
-  outline-offset: 2px;
-}
-```
-
-```jsx
-// Skip link (add to App.jsx)
-<a href="#main-content" className="skip-link">
-  Skip to main content
-</a>
-<main id="main-content">...</main>
-```
-
-## Testing Tools
-- axe DevTools browser extension
-- WAVE web accessibility evaluator
-- Lighthouse accessibility audit
-- VoiceOver (macOS) / NVDA (Windows) screen reader testing
-- Keyboard-only navigation testing
+## Without JavaScript
+- The prerendered page is complete. Every plate and journey stage is readable, and plates show their rendered SVG.

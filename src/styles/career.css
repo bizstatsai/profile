@@ -1,0 +1,172 @@
+.era + .era,
+.career__now {
+  margin-top: clamp(56px, 7vw, 104px);
+}
+
+.era__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line-2);
+}
+
+.era__head h3 {
+  font-size: var(--text-xl);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+}
+
+/* A large year that stays in view while its engagement scrolls by. */
+.engagement,
+.career__now {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 3.2fr) minmax(0, 8.8fr);
+  gap: clamp(16px, 3vw, 48px);
+  padding-block: clamp(30px, 3.6vw, 52px);
+}
+
+.engagement + .engagement,
+.moment + .engagement {
+  border-top: 1px solid var(--line);
+}
+
+.engagement__year {
+  position: sticky;
+  top: calc(var(--header) + 16px);
+  align-self: start;
+  font-size: clamp(3rem, 1.4rem + 5.2vw, 6.75rem);
+  font-weight: 200;
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.engagement article {
+  position: relative;
+  min-width: 0;
+}
+
+.engagement h4,
+.career__now h3 {
+  font-size: clamp(1.625rem, 1.1rem + 1.7vw, 2.75rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.028em;
+  max-width: calc(100% - 12ch);
+}
+
+.engagement__role {
+  margin-top: 6px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.engagement__story {
+  max-width: 68ch;
+  margin-block: 14px 12px;
+}
+
+.engagement__points {
+  max-width: 68ch;
+  margin-bottom: 14px;
+  font-size: var(--text-sm);
+}
+
+.engagement__points li {
+  position: relative;
+  padding: 3px 0 3px 18px;
+}
+
+.engagement__points li::before {
+  content: '';
+  position: absolute;
+  top: 0.95em;
+  left: 0;
+  width: 9px;
+  height: 1px;
+  background: var(--cyan-ink);
+}
+
+.engagement__measure {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-family: var(--font-tech);
+  font-size: clamp(1.25rem, 0.9rem + 1vw, 1.875rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--cyan-ink);
+}
+
+.moment {
+  display: grid;
+  grid-template-columns: minmax(0, 3.2fr) minmax(0, 8.8fr);
+  gap: clamp(16px, 3vw, 48px);
+  align-items: baseline;
+  padding-block: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.moment__year {
+  font-size: var(--text-sm);
+  color: var(--ink);
+}
+
+.moment__body {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.moment__type {
+  flex: none;
+}
+
+.moment p {
+  color: var(--ink);
+}
+
+.career__now {
+  padding-top: clamp(30px, 3.6vw, 48px);
+  border-top: 1px solid var(--line-2);
+}
+
+.career__now .engagement__year {
+  color: var(--cyan-ink);
+}
+
+@media (max-width: 760px) {
+  .engagement,
+  .career__now {
+    grid-template-columns: 1fr;
+  }
+
+  .engagement__year {
+    position: static;
+    font-size: 3rem;
+  }
+
+  .engagement h4,
+  .career__now h3 {
+    max-width: none;
+  }
+
+  .engagement__measure {
+    position: static;
+    margin-top: 12px;
+  }
+
+  .moment {
+    grid-template-columns: 52px minmax(0, 1fr);
+  }
+
+  .moment__type {
+    display: none;
+  }
+}

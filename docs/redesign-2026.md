@@ -2,110 +2,104 @@
 
 **Co-Author**: Srini Centhala, srini@absolut-e.com, Chief Data and AI Architect
 
-The portfolio was rebuilt around one idea: the site is an architect's drawing register. Every
-section is a sheet; every figure is rendered from source; nothing on it depicts a client system
-or an internal identifier. This document records the decisions so the next change does not
-undo them by accident.
+This document records the decisions behind the current design, so the next change does not undo them by accident. The earlier "drawing register" design is in the git history.
 
-## 1. Goals
+## 1. The concept
 
-1. Lead with the work that is inspectable: products, patterns, the platform's public
-   architecture. The earlier site led with a bio and a client logo strip.
-2. Present architecture the way the reference sites do (Fowler, Brown/C4, Hohpe, Richardson,
-   Newman, Richards, Xu, Huyen, Willison, Orosz; see the Platform Blueprint, section 10): one
-   canonical page per concept, a fixed pattern template, diagrams as first-class artefacts in
-   one notation, known uses as public products or anonymised engagements, offerings separated
-   from writing, the distribution channel owned.
-3. Drop the "AI-generated" look: purple-to-cyan gradient headings, glow hover, emoji section
-   markers, Inter as the only face.
-4. Keep every existing section and its content; change order, hierarchy and styling.
-5. Publish nothing confidential. See `docs/diagrams/README.md` for the rule set.
+**The Mind Behind the Architecture.** Turning complex data, technology and intelligence into systems that create business impact.
+
+The memorable element is one drawing, the exploded stack of enterprise planes in the hero: data streams, cloud infrastructure, knowledge network, intelligent systems and business decisions. It is the site's only big gesture. It returns, labelled and open to exploration, as the five AI layers in section 05.
+
+Three further ideas carry the rest:
+- A through-line down the left edge ties the sections into one continuous story.
+- Each claim gets a drawing that argues it: the lens in Philosophy, the ribbon in the data journey.
+- Every drawing states its own standing, so the visitor always knows whether they are looking at a reference pattern, a target design or something that runs.
 
 ## 2. Information architecture
 
-Navigation is grouped the way the reference sites separate work, writing and offerings
-(`navGroups` in `src/data/profile.js`):
+| # | Section | Id | Navigation item |
+|---|---|---|---|
+| - | Hero | `top` | Overview |
+| 01 | The Mind Behind the Architecture | `overview` | Overview |
+| 02 | Technology Is the Medium | `philosophy` | Philosophy |
+| 03 | Behind Every Intelligent Business | `architecture` | Architecture |
+| 04 | Data Is Not Intelligence Yet | `data-journey` | AI & Data |
+| 05 | AI Is Powerful | `ai` | AI & Data |
+| 06 | Experience Built Across Complex Enterprise Environments | `journey` | Journey |
+| 07 | From Architectural Thinking to Real-World Systems | `projects` | Projects |
+| 08 | Ideas That Shape Better Technology | `publications` | Publications |
+| 09 | Architecture Recognized | `recognition` | Publications |
+| 10 | Principles Behind Every Architecture Decision | `principles` | Publications |
+| 11 | Have a Complex Technology Challenge? | `contact` | Contact |
+| - | Colophon and footer | `site-archive` | - |
 
-| Group | Links | Section order on the page |
-|---|---|---|
-| Work | Products · Patterns · Platform · Case Studies | 1 Hero · 2 About · 3 Products · 4 Patterns · 5 Platform · 6 Case Studies · 7 Experience |
-| Writing | Books · Methodology · FAQ | 8 Methodology · 9 Maturity Pyramid · 10 Timeline · 11 Books · 12 Thought Leadership · 13 FAQ |
-| Offerings | Services · Speaking · Contact | 14 Skills · 15 Tech Radar · 16 Certifications · 17 Services · 18 Speaking · 19 Speaker Kit · 20 Contact · Footer |
-
-The old flat `navLinks` array is kept (tests and the footer used it) and trimmed to seven links.
+Drawings sit where they make the argument, not in one gallery. Patterns are grouped into chapters with the capability text they support, AI patterns sit with the AI section, engagement flows sit inside their engagements, and the planning records sit in the colophon.
 
 ## 3. Visual system
 
-Tokens live in `src/index.css`; shared components in `src/App.css`. Legacy token names
-(`--bg-primary`, `--accent-light`, `--gradient-start`, …) are aliases of the new ones so the
-twenty existing components restyle without edits.
+Tokens are in `docs/design-tokens.md`.
 
-| Role | Dark (default) | Light |
-|---|---|---|
-| Background / raised | `#0f1216` / `#1a202a` | `#f6f7f4` / `#ffffff` |
-| Ink / secondary / muted | `#e8ebef` / `#aab2bf` / `#727c8b` | `#1c2230` / `#4a5468` / `#7b8498` |
-| Rule | `#2a323e` | `#d6dae2` |
-| Accent (ink blue) | `#7fa6e0` | `#1f4e8c` |
-| Signal (one orange, used for the sheet mark, proposed elements, the resume button) | `#ff8a4c` | `#d1540f` |
-| Paper (diagram cards, same in both themes) | `#f6f7f4` | `#ffffff` |
+- **Palette**: near-black navy, with purple and cyan used strategically. On drawings, colour names a family of components and has a matching glyph.
+- **Type**: Manrope in light weights for headlines and reading; Space Grotesk for technical labels. Both self-hosted.
+- **Layout**: editorial, on a wide sheet. Large year markers on the timeline, hairlines instead of cards, and measures that vary by content.
+- **Themes**: dark by default, with a light drafting-paper alternative.
+- **Motion**: one orchestrated hero, an entrance for each headline, and a data pulse along connectors. All of it can be paused and all of it respects reduced motion.
 
-Type: Archivo 700/800 for display, IBM Plex Sans for body, IBM Plex Mono for data, labels and
-the title block. Headings are solid ink, never gradient text. Cards have a 6px radius and a
-1px rule; hover changes the border colour only.
+## 4. The drawing system
 
-Structural devices that carry information: the mono **sheet label** above each title (the
-section's place in the register), the **title block** in the hero (name, title, firm, location,
-practice, published, validation, revision), and the **proof strip** (five numbers).
-Numbered markers are used only where the content is a sequence (the cloud-migration pattern).
+All 20 Mermaid sources are redrawn by site components, from data parsed out of those sources at build time. See `docs/diagrams/README.md` for the inventory, the placement and the rules.
 
-## 4. Sections
+This replaces the earlier rule "diagrams are rendered, never drawn by hand". The new rule keeps its purpose: labels and relationships still come only from the sources, and a test compares each drawing with its source.
 
-- **Hero** (`Hero.jsx`): sheet label, name, the bio as thesis, four actions (patterns,
-  experience, contact, resume), "known uses" client tags, the title block, the proof strip.
-  The placeholder avatar is gone; a real headshot can be added back as a title-block cell.
-- **About**: unchanged content, emoji icons removed.
-- **Products** (`Products.jsx`): the thirteen-product family with status pills, public URLs,
-  and a platform line that names no internals.
-- **Patterns** (`ArchitecturePatterns.jsx`): ten patterns in the pattern-language template
-  (intent, forces, solution, consequences, known uses, related, stack), filterable by layer
-  (Data platform · AI & agents · Platform & operations), each with a rendered diagram and a
-  "view Mermaid source" link. Four patterns are new and come from the BizStats platform:
-  self-hosted primary with cloud pilot light, availability as a state machine, scale-to-zero
-  environments with a door, LLM router with provider fallback.
-- **Platform** (`Platform.jsx`, new): two public-safe figures of the product family, the C4
-  system context and the release path, each with its claim in the caption.
-- **Services / Speaking / Contact**: unchanged content, icons removed, restyled by tokens.
-- **Footer**: identity, the three nav groups, elsewhere links, and the statement that every
-  diagram is rendered from source and no client system is depicted.
+## 5. Content decisions
 
-## 5. Diagrams pipeline
+The brief asked for nothing to be invented and nothing valuable to be lost. Where the two pulled against each other, or where the old site's claims could not be supported, these are the calls that were made.
 
-`npm run diagrams` renders `docs/diagrams/src/*.mmd` to `public/diagrams/*.svg` with
-mermaid-cli and copies the sources next to them. A test fails if a pattern references a
-diagram that is not rendered. Rules, inventory and the public/internal boundary:
-`docs/diagrams/README.md`.
+**Taken out because they could not be corroborated:**
+- "4,700+ stores" in the Walmart engagement. Replaced with the documented scope.
+- "Reducing manual QA by 80%" in the Walmart engagement. Replaced with the documented result.
 
-## 6. Accessibility and performance
+**Reworded to say only what the record supports:**
+- "10+ Fortune 100 clients" became the count of named clients, 14, because the named list does not establish the larger claim.
+- "Google Cloud, AWS, and Azure certified" became "Experience across Google Cloud, AWS, and Azure", because the credentials listed are course credentials, not those certifications.
+- Case studies no longer say "anonymized", because the clients are named on the page.
+- Forrester is presented as an evaluation with its context and an explicit "not a formal award".
 
-- Section landmarks and heading order unchanged; the patterns list uses `aria-pressed`
-  buttons and an `aria-live` detail panel; every figure has `alt` and a caption.
-- Focus ring is the signal colour on every interactive element; reduced-motion is respected.
-- Fonts are loaded from Google Fonts with `display=swap`; sections below the fold stay
-  lazy-loaded; diagrams are static SVG with `loading="lazy"` (no Mermaid runtime in the bundle).
-- Page body never scrolls horizontally at 400px; checked in headless Chromium in both themes.
+**Corrected against the publishers' pages:**
+- The three Business Expert Press books are dated March 2020. The old timeline said 2022 and 2025.
+- *OneStop Project Management* is credited to four authors, including Muthu Shanmugam, who was missing.
 
-## 7. Content rules for anything added later
+**Reduced or relocated, not removed:**
+- Coming-soon channels are reduced to one line.
+- The first page wireframe keeps its stale placeholder copy, under a label that says it is superseded.
+- The sitemap record's retired email address is relabelled "Email link".
+- Questions in "Ask an Architect" show eight at first, with a button for all 30. All of them are in the page for crawlers and no-script readers.
 
-1. Known uses are public products or anonymised engagements; never a client's internal system.
-2. A figure is added as a `.mmd` source, rendered by the pipeline, and captioned with one claim.
-3. Pattern pages keep the eight positions in the same order so two can be compared by scanning.
-4. Every page must contain something only the author could write: a drill number, a decision,
-   a consequence that is not all positive. That is the test for generic content.
+**Left out because the material does not exist:**
+- No resume link, because there is no resume file.
+- No testimonials and no client logos.
 
-## 8. Checklist before publishing a change
+## 6. To confirm with the site owner
 
-- `npm test` and `npm run build` pass.
-- `npm run diagrams` was run if any `.mmd` changed and the SVGs are committed.
-- No hostname, address, port, namespace, codename, ticket id or staff name in any new text or
-  diagram (grep the diff for digits-with-dots and for the internal names list).
-- Screenshot at 1440px and 400px in both themes.
+| Item | Why it needs confirming |
+|---|---|
+| Portrait | Taken from the author page at Business Expert Press, at 400 by 400 pixels. A higher-resolution original would look better. |
+| Naming clients | The old site described engagements as anonymized while naming the clients. They are named here. Confirm that this is acceptable to the owner and the clients. |
+| 25+ years and 22K+ LinkedIn followers | Carried over as stated. They could not be checked from outside. |
+| Questions in "Ask an Architect" | Some answers quote general-industry figures that could not be verified. They are carried over unchanged. |
+| The dropped figures | If a source exists for 4,700+ stores or the 80% reduction, they can come back. |
+| Three MongoDB course credentials | The issuer's links no longer resolve, so the page lists them without links and says so. Supply replacements if the issuer provides any. |
+| Contact form | Without `VITE_FORMSPREE_ENDPOINT` the form opens an email draft. Set the variable to post through Formspree. |
+| Custom domain | `srinicenthala.com` is currently a parked page, so the canonical address is the GitHub Pages one. Add `public/CNAME` and `VITE_SITE_URL` to move. |
+
+## 7. Two things that are easy to break
+
+- **Prerendered sections stay in document order.** `entry-server.jsx` sets `progressiveChunkSize: Infinity`, and `prerender.mjs` fails the build otherwise. Without it, in-page links far down the page can fail on load.
+- **The prerendered page has its final shape.** A diagram card renders its wide and phone versions until it has been measured, and a container query shows the right one. Without it, the phone layout shifts by thousands of pixels on hydration and in-page links land in the wrong place.
+
+## 8. How it was checked
+
+- `npm test`: content authenticity, section order and copy, navigation targets, interactions, and each drawing against its source and the layout lint.
+- A browser run of the production build at 1920, 1440, 1280, 1024, 768, 390 and 360 px: no sideways scroll, no console or network errors, the name inside the first view on laptops, and text inside its box on every drawing.
+- Interactions: chapters, plates, deep links, component selection, legend, zoom, full screen, stepper, keyboard, phone menu, theme, motion, question filter and contact form.
+- Reduced motion, JavaScript off, axe in both themes at desktop and phone widths, and Lighthouse on desktop and mobile.

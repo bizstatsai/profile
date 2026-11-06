@@ -2,110 +2,88 @@
 
 **Co-Author**: Srini Centhala, srini@absolut-e.com, Chief Data and AI Architect
 
-Reference for all design tokens used across the portfolio. Defined as CSS custom properties in `src/index.css`.
+Reference for the design tokens. They are CSS custom properties in `src/styles/tokens.css`, which is authoritative. Dark is the identity; light is "drafting paper", a reader's choice.
 
-## Colors
+## Surfaces and text
 
-### Backgrounds
-| Token | Value | Usage |
-|-------|-------|-------|
-| `--bg-primary` | `#0a0a0f` | Main page background |
-| `--bg-secondary` | `#12121a` | Alternating section background |
-| `--bg-card` | `#1a1a2e` | Card/panel backgrounds |
-| `--bg-card-hover` | `#1f1f35` | Card hover state |
+| Token | Dark | Light | Usage |
+|---|---|---|---|
+| `--bg` | `#080b14` | `#f6f7fb` | Page |
+| `--bg-2` | `#101625` | `#eceff6` | Alternating section band |
+| `--surface` | `#151e30` | `#ffffff` | Raised surface |
+| `--surface-2` | `#1c2740` | `#f1f3f9` | Raised surface, hover |
+| `--canvas` | `#0b101c` | `#fbfcfe` | Drawing area |
+| `--node` | `#111929` | `#ffffff` | Component box on a drawing |
+| `--ink` | `#f8fafc` | `#0b1220` | Primary text |
+| `--ink-2` | `#a7b3c7` | `#414d66` | Secondary text |
+| `--ink-3` | `#8390a8` | `#5a667e` | Tertiary text and labels |
+| `--line` | `rgba(148,163,184,.16)` | `rgba(30,41,59,.14)` | Hairlines |
+| `--line-2` | `rgba(148,163,184,.32)` | `rgba(30,41,59,.3)` | Stronger rules |
 
-### Text
-| Token | Value | Usage |
-|-------|-------|-------|
-| `--text-primary` | `#e8e8f0` | Headings, body text |
-| `--text-secondary` | `#9898b0` | Subtitles, descriptions |
-| `--text-muted` | `#686880` | Tertiary, metadata |
+## Accents
 
-### Accent
-| Token | Value | Usage |
-|-------|-------|-------|
-| `--accent` | `#6c63ff` | Primary accent (purple) |
-| `--accent-light` | `#8b83ff` | Hover states, links |
-| `--accent-glow` | `rgba(108,99,255,0.15)` | Glow effects, tag bg |
-| `--gradient-start` | `#6c63ff` | Gradient left/top |
-| `--gradient-end` | `#00d4ff` | Gradient right/bottom (cyan) |
-| `--success` | `#00c9a7` | Success states, bullet dots |
+Purple and cyan are used strategically: the primary button, the active state and small technical labels. They are not used for decoration.
 
-### Borders
-| Token | Value | Usage |
-|-------|-------|-------|
-| `--border` | `#2a2a3e` | Card borders, dividers |
+| Token | Dark | Light | Usage |
+|---|---|---|---|
+| `--violet` | `#7c3aed` | `#6d28d9` | Primary button, active rule |
+| `--violet-ink` | `#b9a0ff` | `#5b21b6` | Violet as text |
+| `--cyan` | `#06b6d4` | `#0e7490` | Cyan as a line or fill |
+| `--cyan-ink` | `#45d3e8` | `#0e7490` | Cyan as text |
+| `--sky` | `#38bdf8` | `#0369a1` | Secondary accent |
+| `--on-violet` | `#ffffff` | `#ffffff` | Text on the primary button |
+
+## Colour families on drawings
+
+Each family also has a glyph, drawn by `CategoryGlyph`, so colour is never the only signal.
+
+| Token | Dark | Light | Family |
+|---|---|---|---|
+| `--cat-source` | `#22d3ee` | `#0e7490` | Data sources |
+| `--cat-process` | `#60a5fa` | `#1d4ed8` | Processing and transformation |
+| `--cat-storage` | `#8f92ff` | `#4f46e5` | Storage |
+| `--cat-ai` | `#d08bff` | `#9333ea` | AI and intelligence |
+| `--cat-governance` | `#fbbf24` | `#b45309` | Security and governance |
+| `--cat-consumption` | `#34d399` | `#047857` | Business consumption |
+| `--cat-neutral` | `#94a3b8` | `#475569` | Tools and external services |
+| `--cat-people` | `#cbd5e1` | `#334155` | People |
 
 ## Typography
 
-### Font Families
-| Usage | Font | Fallback |
-|-------|------|----------|
-| Body | Inter | -apple-system, sans-serif |
-| Code/Tags | JetBrains Mono | monospace |
+| Token | Value | Usage |
+|---|---|---|
+| `--font-display`, `--font-body` | Manrope, then a metric-matched Arial fallback | Headlines and reading text |
+| `--font-tech` | Space Grotesk | Technical labels, through the `.tech` class |
 
-### Font Weights
-| Weight | Usage |
-|--------|-------|
-| 300 | Light text |
-| 400 | Body text |
-| 500 | Nav links, tags |
-| 600 | Card titles, subtitles |
-| 700 | Section titles, hero |
+| Token | Size |
+|---|---|
+| `--text-xs` | `0.8125rem` |
+| `--text-sm` | `0.9375rem` |
+| `--text-md` | `1.0625rem` |
+| `--text-lg` | `clamp(1.1875rem, 1rem + 0.6vw, 1.4375rem)` |
+| `--text-xl` | `clamp(1.5rem, 1.1rem + 1.3vw, 2.25rem)` |
+| `--text-2xl` | `clamp(2.125rem, 1.2rem + 3.3vw, 4.5rem)` |
+| `--text-3xl` | `clamp(2.4rem, 1.15rem + 4.3vw, 5.4rem)` |
 
-### Font Sizes
-| Element | Size |
-|---------|------|
-| Hero h1 | clamp(2.5rem, 5vw, 4rem) |
-| Section title | 2rem |
-| Section subtitle | 1.05rem |
-| Card title | 1.1-1.2rem |
-| Body text | 0.95rem |
-| Tags | 0.8rem |
-| Category labels | 0.85rem |
+Headlines are set in light weights with tight tracking. Sentences in a headline that set up the point read in `--ink-2`, and the point itself reads in `--ink`.
 
-## Spacing
+## Space and motion
 
-| Usage | Value |
-|-------|-------|
-| Section padding | 100px vertical |
-| Container max-width | 1100px |
-| Container padding | 24px horizontal |
-| Card padding | 28px |
-| Card gap | 24px |
-| Tag padding | 4px 12px |
-| Button padding | 12px 28px |
+| Token | Value | Usage |
+|---|---|---|
+| `--sheet` | `1520px` | Widest content |
+| `--gutter` | `clamp(22px, 6.4vw, 104px)` | Side margin |
+| `--gap` | `clamp(16px, 2vw, 32px)` | Default gap |
+| `--header` | `68px` | Header height, and the anchor offset |
+| `--ease-out` | `cubic-bezier(0.2, 0.7, 0.2, 1)` | Entrances |
 
-## Border Radius
+## Drawing type
 
-| Element | Value |
-|---------|-------|
-| Cards | 12px |
-| Buttons | 8px |
-| Tags | 20px |
-| Book covers | 8px |
+SVG text does not wrap, so `src/lib/diagram/text.js` wraps ahead of time from estimated character widths. Change these together with the matching CSS.
 
-## Transitions
-
-| Property | Duration | Easing |
-|----------|----------|--------|
-| Card hover | 0.3s | ease |
-| Nav background | 0.3s | ease |
-| Link color | 0.2s | ease |
-| Button transform | 0.3s | ease |
-
-## Breakpoints
-
-| Name | Width | Changes |
-|------|-------|---------|
-| Tablet | 768px | Mobile nav, stack grids |
-| Mobile | 640px | Single column experience |
-
-## Gradients
-
-| Name | Value | Usage |
-|------|-------|-------|
-| Primary gradient | `linear-gradient(135deg, #6c63ff, #00d4ff)` | Titles, buttons, stats |
-| Card glow | `0 0 30px rgba(108,99,255,0.15)` | Card hover shadow |
-| Hero orb 1 | `radial-gradient(circle, rgba(108,99,255,0.12), transparent)` | Decorative bg |
-| Hero orb 2 | `radial-gradient(circle, rgba(0,212,255,0.08), transparent)` | Decorative bg |
+| Role | Size | Line height | Estimated character width |
+|---|---|---|---|
+| Component title | 14 | 18 | 7.7 |
+| Component detail | 12 | 16 | 6.35 |
+| Class member | 11.5 | 15 | 6.1 |
+| Connector label | 11.5 | 14 | 6.1 |

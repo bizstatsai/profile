@@ -2,16 +2,18 @@
 
 **Co-Author**: Srini Centhala, srini@absolut-e.com, Chief Data and AI Architect
 
-**Repo**: https://github.com/Scenthala/profile
-**Stack**: React 19 + Vite 5 | Dark/Light theme | Deployed: TBD
+**Repo**: https://github.com/bizstatsai/profile
+**Stack**: React 19 + Vite 5 | Dark/Light theme | Deployed: GitHub Pages
 **Gap Analysis**: `docs/gap-analysis.md` (vs. top 15 influencers)
+**Open questions for the site owner**: `docs/redesign-2026.md`, section 6
 
 ---
 
 ## Priority 1 - Core (Remaining)
-- [ ] Add professional headshot/avatar image to Hero section
+- [x] Add portrait, from the Business Expert Press author page
+- [ ] Replace the portrait with a higher-resolution original
 - [x] Add actual book cover images (sourced from Business Expert Press + Google Books)
-- [ ] Upload resume PDF to `public/Srini_Centhala_Resume.pdf` (download button already wired)
+- [ ] Supply a resume PDF, then add a Download Resume link to the hero. The link was removed because no file exists.
 - [x] Create OG image (`public/og-image.png`, 1200x630) for social sharing previews
 - [x] Add favicon (SVG + PNG 32px + PNG 192px apple-touch-icon)
 
@@ -20,8 +22,8 @@
 ### Case Studies & Social Proof (Gap vs. Allie Miller, Cassie Kozyrkov, Brent Dykes)
 - [x] Add interactive case studies section with anonymized client stories, ROI metrics
 - [x] Write 5 case studies: Walmart (Demand Forecast), AT&T (2PB Analytics), Experian (NextGen Forrester), eBay (100TB DW), DirecTV (97% SCM accuracy)
-- [ ] Add testimonials/recommendations section with client quotes
-- [ ] Quantify impact: "$XM saved", "X% improvement", "XPB processed"
+- [ ] Add testimonials/recommendations, only with real, attributable quotes the authors have approved
+- [ ] Quantify impact, only with figures from a record that can be cited
 - [x] Add architecture flow diagrams to case studies
 
 ### Thought Leadership Hub (Gap vs. Tristan Handy, Chip Huyen, Joe Reis)
@@ -43,7 +45,7 @@
 
 ### Architecture Patterns Library (Gap vs. Maxime Beauchemin open-source)
 - [x] Create reference architectures section (Lakehouse, MLOps, Data Mesh, Agentic AI + MCP, Streaming, Cloud Migration) with layer visualizations
-- [ ] Add interactive architecture diagrams with hover/expand
+- [x] Add interactive architecture diagrams with hover, selection, zoom and full screen
 - [ ] Create "Cloud Architecture Decision Matrix: AWS vs Azure vs GCP" PDF lead magnet
 - [ ] Create "Lakehouse Migration Checklist" PDF lead magnet
 

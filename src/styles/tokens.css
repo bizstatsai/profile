@@ -1,0 +1,126 @@
+/* Design tokens. Dark is the identity; light is "drafting paper", a reader's choice. */
+@font-face {
+  font-family: 'Manrope';
+  src: url('/fonts/manrope.woff2') format('woff2-variations');
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/space-grotesk.woff2') format('woff2-variations');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  src: url('/fonts/ibm-plex-mono.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Manrope Fallback';
+  src: local('Arial');
+  size-adjust: 104%;
+  ascent-override: 103%;
+  descent-override: 29%;
+  line-gap-override: 0%;
+}
+
+:root,
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #080b14;
+  --bg-2: #101625;
+  --surface: #151e30;
+  --surface-2: #1c2740;
+  --canvas: #0b101c;
+  --node: #111929;
+
+  --ink: #f8fafc;
+  --ink-2: #a7b3c7;
+  --ink-3: #8390a8;
+  --line: rgba(148, 163, 184, 0.16);
+  --line-2: rgba(148, 163, 184, 0.32);
+
+  --violet: #7c3aed;
+  --violet-ink: #b9a0ff;
+  --cyan: #06b6d4;
+  --cyan-ink: #45d3e8;
+  --sky: #38bdf8;
+  --on-violet: #ffffff;
+
+  --cat-source: #22d3ee;
+  --cat-process: #60a5fa;
+  --cat-storage: #8f92ff;
+  --cat-ai: #d08bff;
+  --cat-governance: #fbbf24;
+  --cat-consumption: #34d399;
+  --cat-neutral: #94a3b8;
+  --cat-people: #cbd5e1;
+
+  --portrait-tint: #0f1830;
+}
+
+[data-theme='light'] {
+  color-scheme: light;
+
+  --bg: #f6f7fb;
+  --bg-2: #eceff6;
+  --surface: #ffffff;
+  --surface-2: #f1f3f9;
+  --canvas: #fbfcfe;
+  --node: #ffffff;
+
+  --ink: #0b1220;
+  --ink-2: #414d66;
+  --ink-3: #5a667e;
+  --line: rgba(30, 41, 59, 0.14);
+  --line-2: rgba(30, 41, 59, 0.3);
+
+  --violet: #6d28d9;
+  --violet-ink: #5b21b6;
+  --cyan: #0e7490;
+  --cyan-ink: #0e7490;
+  --sky: #0369a1;
+  --on-violet: #ffffff;
+
+  --cat-source: #0e7490;
+  --cat-process: #1d4ed8;
+  --cat-storage: #4f46e5;
+  --cat-ai: #9333ea;
+  --cat-governance: #b45309;
+  --cat-consumption: #047857;
+  --cat-neutral: #475569;
+  --cat-people: #334155;
+
+  --portrait-tint: #dfe5f2;
+}
+
+:root {
+  --font-display: 'Manrope', 'Manrope Fallback', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Manrope', 'Manrope Fallback', 'Segoe UI', system-ui, sans-serif;
+  --font-tech: 'Space Grotesk', 'Manrope', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  --gutter: clamp(22px, 6.4vw, 104px);
+  --gap: clamp(16px, 2vw, 32px);
+  --sheet: 1520px;
+  --header: 68px;
+
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-md: 1.0625rem;
+  --text-lg: clamp(1.1875rem, 1rem + 0.6vw, 1.4375rem);
+  --text-xl: clamp(1.5rem, 1.1rem + 1.3vw, 2.25rem);
+  --text-2xl: clamp(2.125rem, 1.2rem + 3.3vw, 4.5rem);
+  --text-3xl: clamp(2.4rem, 1.15rem + 4.3vw, 5.4rem);
+
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+}

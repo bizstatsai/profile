@@ -1,81 +1,28 @@
-# SEO & Meta Tags Checklist
+# SEO and Meta Tags
 
 **Co-Author**: Srini Centhala, srini@absolut-e.com, Chief Data and AI Architect
 
-## Head Meta Tags (to add to index.html)
+## In place
 
-```html
-<!-- Primary Meta -->
-<meta name="title" content="Srini Centhala - Chief Data and AI Architect">
-<meta name="description" content="Seasoned data architect and technology leader specializing in AI-driven business solutions, enterprise architecture, and risk management. Founder of Bizstats.AI.">
-<meta name="keywords" content="data architect, AI, machine learning, enterprise architecture, cloud, Google Cloud, Bizstats.AI, Srini Centhala">
-<meta name="author" content="Srini Centhala">
-<meta name="robots" content="index, follow">
+- **Prerendered HTML**: the whole page is in `dist/index.html`, in document order, so crawlers and link previews need no JavaScript.
+- **`index.html`**: title, description, canonical link, Open Graph and Twitter tags, social image with alt text, theme colour.
+- **Structured data**: a `Person` block with name, job title, employers, alumni record, location and `sameAs` links. Keep it to facts the site itself states.
+- **Social image**: `public/og-image.png`, 1200 by 630.
+- **`public/sitemap.xml`** and **`public/robots.txt`**.
 
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://srinicenthala.com/">
-<meta property="og:title" content="Srini Centhala - Chief Data and AI Architect">
-<meta property="og:description" content="Seasoned data architect specializing in AI-driven business solutions. Author of 3 books on AI. Founder of Bizstats.AI.">
-<meta property="og:image" content="https://srinicenthala.com/og-image.png">
+## Addresses
 
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="https://srinicenthala.com/">
-<meta property="twitter:title" content="Srini Centhala - Chief Data and AI Architect">
-<meta property="twitter:description" content="Seasoned data architect specializing in AI-driven business solutions. Author of 3 books on AI.">
-<meta property="twitter:image" content="https://srinicenthala.com/og-image.png">
+`VITE_SITE_URL` sets the canonical link, the social tags and the structured data at build time. It defaults to `https://bizstatsai.github.io/profile/` in `vite.config.js`.
 
-<!-- Canonical -->
-<link rel="canonical" href="https://srinicenthala.com/">
-```
+## When moving to a custom domain
 
-## Structured Data (JSON-LD)
+1. Add `public/CNAME` with the domain. The deploy workflow then builds with the root base path.
+2. Set `VITE_SITE_URL` in the workflow's build step, with a trailing slash.
+3. Update `public/sitemap.xml` and `public/robots.txt`.
+4. Update the `lastmod` date in the sitemap whenever content changes materially.
 
-```html
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Srini Centhala",
-  "url": "https://srinicenthala.com",
-  "image": "https://srinicenthala.com/avatar.jpg",
-  "jobTitle": "Founder & Chief Data and AI Architect",
-  "worksFor": {
-    "@type": "Organization",
-    "name": "Bizstats.AI"
-  },
-  "sameAs": [
-    "https://linkedin.com/in/srinicenthala",
-    "https://bizstats.ai"
-  ],
-  "knowsAbout": [
-    "Data Architecture",
-    "Artificial Intelligence",
-    "Machine Learning",
-    "Cloud Computing",
-    "Enterprise Architecture"
-  ],
-  "alumniOf": {
-    "@type": "CollegeOrUniversity",
-    "name": "Bangalore University"
-  }
-}
-</script>
-```
+## After a release
 
-## Assets Needed
-- [ ] `favicon.ico` (16x16, 32x32)
-- [ ] `apple-touch-icon.png` (180x180)
-- [ ] `og-image.png` (1200x630) - social sharing preview
-- [ ] `avatar.jpg` - professional headshot
-- [ ] `robots.txt`
-- [ ] `sitemap.xml`
-
-## Performance Targets
-- Lighthouse Performance: > 90
-- Lighthouse Accessibility: > 95
-- Lighthouse SEO: > 95
-- First Contentful Paint: < 1.5s
-- Largest Contentful Paint: < 2.5s
-- Cumulative Layout Shift: < 0.1
+- Run Lighthouse on the live address.
+- Check the social card with the LinkedIn Post Inspector.
+- Check the structured data with the Schema.org validator.

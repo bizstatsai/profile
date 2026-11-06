@@ -2,107 +2,84 @@
 
 **Co-Author**: Srini Centhala, srini@absolut-e.com, Chief Data and AI Architect
 
-## Architecture Overview
+## Overview
 
-Single-page application (SPA) built with React + Vite. No server-side rendering or backend. Static site that can be deployed to any CDN (Vercel, Netlify, GitHub Pages, Cloudflare Pages).
+A static single page, built with React and Vite, prerendered at build time and hydrated in the browser. There is no backend. It deploys to any static host; the repository deploys to GitHub Pages.
 
 ```
-┌─────────────────────────────────┐
-│           index.html            │
-│  (Google Fonts, meta, #root)    │
-├─────────────────────────────────┤
-│           main.jsx              │
-│  (React root, global CSS)       │
-├─────────────────────────────────┤
-│            App.jsx              │
-│  (Section composition)          │
-├──────┬──────┬──────┬───────────┤
-│Navbar│ Hero │About │Experience │
-│Books │Skills│Contact│ Footer   │
-└──────┴──────┴──────┴───────────┘
+Mermaid sources (.mmd)          src/data/*.js
+   docs/diagrams, uml, ...         all copy, layouts, colour families
+        |                               |
+        |  parsed at build time         |
+        v                               v
+   vite plugin -------------------> React components
+                                        |
+                       vite build       |   vite build --ssr + prerender.mjs
+                       (client chunks)  |   (the whole page as HTML)
+                                        v
+                                  dist/index.html  --> hydrated in the browser
 ```
 
-## Component Architecture
+## How a page load works
 
-### Layout Pattern
-- **Navbar**: Fixed position, transparent -> blurred on scroll
-- **Sections**: Full-width, alternating bg colors, 100px vertical padding
-- **Container**: Max-width 1100px, centered, 24px horizontal padding
+1. The HTML already holds every section in document order, so first paint, crawlers, link previews and no-script visitors all get the full content.
+2. An inline script in the head applies the stored theme and motion preference before first paint.
+3. The main bundle hydrates the header, hero, concept and philosophy. Each later section is a lazy chunk that hydrates inside its own `Suspense` boundary.
+4. The hero canvas draws its planes once to offscreen canvases, then composites them each frame. It stops when off screen, when the tab is hidden, or when motion is off.
 
-### Component Pattern
-Each section component:
-1. Contains its own data as a const array (no external data layer)
-2. Uses shared CSS classes from `App.css` (`.section`, `.card`, `.tag`, `.btn`)
-3. Uses inline styles for component-specific layout
-4. Is self-contained with no cross-component dependencies
+## Layers
 
-### Styling Architecture
-```
-index.css (Global)
-├── CSS custom properties (design tokens)
-├── Reset styles
-├── Base element styles (body, a, scrollbar)
-└── Selection styles
+| Layer | Where | Responsibility |
+|---|---|---|
+| Content | `src/data/` | All copy. One file per domain. |
+| Drawing sources | `docs/` `.mmd` files | Labels and relationships of every drawing. |
+| Drawing layout | `src/lib/diagram/` | Pure functions from a model and a spec to coordinates. Also the layout lint. |
+| Drawing parts | `src/components/architecture/` | SVG nodes, connectors, layers, toolbar, inspector, full screen. |
+| Sections | `src/sections/`, `src/components/*` | Compose content and drawings into the page. |
+| Styling | `src/styles/` | Tokens, then global rules, then one file per area. |
+| Preferences | `src/lib/motion.js`, `useTheme` | Motion and theme, stored locally and applied before paint. |
 
-App.css (Shared)
-├── .section (padding, positioning)
-├── .container (max-width, centering)
-├── .section-title / .section-subtitle
-├── .card (bg, border, hover effects)
-├── .tag (badge/chip styling)
-└── .btn / .btn-primary / .btn-outline
+## The drawing system
 
-Components (Inline)
-└── Component-specific layouts via style={{}}
-```
+`DiagramCard` is the unit the page uses. It chooses a surface by the width it is given. In the prerendered page both versions are present and a container query shows the right one, so nothing shifts on hydration. Once the card has been measured, only the version in use stays mounted.
 
-## Design Decisions
+- wide: `ArchitectureCanvas` for flow, state, class and entity diagrams, or `SequenceCanvas` for sequences
+- narrow, with a `narrow` layout: the same canvas with the vertical layout
+- narrow, sequence: `SequenceSteps`, a numbered list
+- narrow, system context: `LayerList`, a list by layer
 
-### Why Inline Styles
-- Rapid prototyping with immediate visual feedback
-- No build-time CSS processing needed
-- Co-located styling with component logic
-- **Trade-off**: Harder to maintain at scale. Consider migrating to CSS Modules or Tailwind if the site grows significantly.
+Each card has `DiagramToolbar` (zoom, reset, stepper, pause, text version, full screen), `ArchitectureLegend`, a `ComponentInspector`, and `DiagramFullscreen`, a native `dialog`. Selecting a component lights what it connects to. Selecting a layer name opens that layer: the rest dims, and the inspector lists what it holds and what crosses its boundary. Zoom and pan are held in `useZoomPan` in viewBox units. The page keeps scrolling normally until a visitor zooms in.
 
-### Why No Router
-- Single-page portfolio with anchor-based navigation
-- Simpler architecture, faster load
-- Smooth scroll via `scroll-behavior: smooth` on `html`
-- **When to add**: If blog/articles section or multi-page features are added
+`ArchitectureShowcase` groups plates into chapters and handles deep links of the form `#plate-<slug>` and `#plate-<slug>/<nodeId>`.
 
-### Why No State Management
-- No global state needed - each component is self-contained
-- Navbar scroll state uses local useState/useEffect
-- **When to add**: If dynamic data fetching (CMS, API) is introduced
+## Responsive strategy
 
-### Why No Icon Library
-- Minimal icon usage, HTML entities suffice
-- Reduces bundle size
-- **When to add**: If more icons are needed, consider Lucide React (tree-shakeable)
+- Fluid type with `clamp()`, and `cqw` for the hero name, so it spans its container
+- The hero is sized with `vh` as well as `vw`, so the composition fits the first view of a short laptop screen
+- Grid layouts collapse at 1040, 900, 760 and 620 px
+- Diagrams switch on the width of their own card, not the viewport, through a container query and a `ResizeObserver`
+- Tested at 1920, 1440, 1280, 1024, 768, 390 and 360 px wide
 
-## Responsive Strategy
-- CSS Grid with `auto-fit` and `minmax()` for card layouts
-- `clamp()` for fluid typography
-- Media queries at 768px (tablet) and 640px (mobile) breakpoints
-- Mobile hamburger menu in Navbar
+## Performance
 
-## Performance Considerations
-- Google Fonts loaded with `preconnect` hints
-- No images (placeholder icons only) - fast initial load
-- Vite production build with tree-shaking and minification
-- Current bundle: ~64KB gzipped (React + app code)
+- No animation or UI library. React is the only runtime dependency.
+- Fonts are self-hosted, preloaded and use `font-display: swap`, with a metric-matched fallback to avoid layout shift
+- Images have dimensions and load lazily
+- Canvas work pauses whenever it cannot be seen
+- Only the active plate mounts its drawing
 
-## Deployment Options
-| Platform | Method | Notes |
-|----------|--------|-------|
-| Vercel | `vercel` CLI or Git integration | Recommended, zero-config for Vite |
-| Netlify | Git integration or drag-and-drop | Add `netlify.toml` for redirects |
-| GitHub Pages | `gh-pages` package | Set `base` in `vite.config.js` |
-| Cloudflare Pages | Git integration | Fast global CDN |
+## Failure behaviour
 
-## Future Architecture Considerations
-- **CMS Integration**: Headless CMS (Contentful, Sanity) for blog content
-- **API Layer**: Serverless functions for contact form
-- **Analytics**: Client-side analytics (Plausible for privacy-friendly)
-- **Animation**: Framer Motion for scroll-triggered animations
-- **Testing**: Vitest + React Testing Library for component tests
+| What fails | What happens |
+|---|---|
+| JavaScript off or broken | All content stays readable, including every plate and stage. Plates show their rendered SVG. |
+| Local storage refused | Preferences last for the page view. |
+| Reduced motion requested | No entrances, no loops, no smooth scrolling. Canvases draw one still frame. |
+| No form service configured | The contact form opens an email draft instead. |
+| Form service down | The form says so and gives the email address. |
+
+## Deployment
+
+`.github/workflows/deploy.yml` runs on every push to `main`: `npm ci`, `npm test`, chooses the base path, `npm run build`, and publishes `dist/` to GitHub Pages. Pull requests run the same steps without publishing.
+
+Any static host works. Set `VITE_BASE` to the path the site is served under and `VITE_SITE_URL` to its public address, with a trailing slash.

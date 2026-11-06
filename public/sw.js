@@ -1,4 +1,4 @@
-const CACHE_NAME = 'srini-portfolio-v2'
+const CACHE_NAME = 'srini-portfolio-v3'
 // Resolve every precached URL against the worker's own location, so the same
 // file works at a domain root and under a GitHub Pages project path.
 const BASE = new URL('./', self.location.href).href
@@ -8,7 +8,6 @@ const STATIC_ASSETS = [
   'favicon-32.png',
   'favicon-192.png',
   'og-image.png',
-  'images/avatar-placeholder.svg',
 ].map((path) => new URL(path, BASE).href)
 
 self.addEventListener('install', (event) => {
@@ -27,22 +26,34 @@ self.addEventListener('activate', (event) => {
   self.clients.claim()
 })
 
+const remember = (request, response) => {
+  if (response.ok) {
+    const clone = response.clone()
+    caches.open(CACHE_NAME).then((cache) => cache.put(request, clone))
+  }
+  return response
+}
+
 self.addEventListener('fetch', (event) => {
-  if (event.request.method !== 'GET') return
+  const { request } = event
+  if (request.method !== 'GET' || new URL(request.url).origin !== self.location.origin) return
+
+  // Pages come from the network whenever there is one, so a release reaches returning visitors at once.
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request)
+        .then((response) => remember(request, response))
+        .catch(() => caches.match(request).then((cached) => cached || caches.match(BASE)))
+    )
+    return
+  }
 
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      const fetchPromise = fetch(event.request)
-        .then((response) => {
-          if (response.ok) {
-            const clone = response.clone()
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone))
-          }
-          return response
-        })
+    caches.match(request).then((cached) => {
+      const fresh = fetch(request)
+        .then((response) => remember(request, response))
         .catch(() => cached)
-
-      return cached || fetchPromise
+      return cached || fresh
     })
   )
 })

@@ -1,102 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark" data-motion="on">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Srini Centhala - Chief Data and AI Architect</title>
-
-    <!-- Primary Meta Tags -->
-    <meta name="title" content="Srini Centhala - Chief Data and AI Architect" />
-    <meta name="description" content="25+ year veteran Chief Data and AI Architect. Founder of Absolut-e Data Com & BizStats AI. Fortune 100 clients including AT&T, Walmart, Experian, UPS, eBay. Author of 4 books on AI." />
-    <meta name="keywords" content="chief data and AI architect, data architect, AI architect, cloud architect, enterprise architecture, Srini Centhala, BizStats AI, Absolut-e Data Com, Snowflake, Databricks, AWS, GCP, Azure, machine learning, MLOps" />
+    <title>Srini Centhala — Chief Data &amp; AI Architect</title>
+    <meta name="description" content="Srini Centhala is a Chief Data &amp; AI Architect with 25+ years designing enterprise data, cloud and AI systems. Founder of Absolut-e Data Com and BizStats AI. Explore his architecture patterns, career and books." />
     <meta name="author" content="Srini Centhala" />
     <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="%VITE_SITE_URL%" />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Srini Centhala - Chief Data and AI Architect" />
-    <meta property="og:description" content="25+ year veteran architecting data systems for Fortune 100 companies. Founder of Absolut-e Data Com & BizStats AI. Author of 4 books on AI, security, and risk management." />
-    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Srini Centhala" />
+    <meta property="og:url" content="%VITE_SITE_URL%" />
+    <meta property="og:title" content="Srini Centhala — The Mind Behind the Architecture" />
+    <meta property="og:description" content="Chief Data &amp; AI Architect. Turning complex data, technology and intelligence into systems that create business impact." />
+    <meta property="og:image" content="%VITE_SITE_URL%og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Srini Centhala, Chief Data &amp; AI Architect, with an exploded drawing of enterprise architecture layers." />
+    <meta property="profile:first_name" content="Srini" />
+    <meta property="profile:last_name" content="Centhala" />
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:title" content="Srini Centhala - Chief Data and AI Architect" />
-    <meta property="twitter:description" content="25+ year veteran architecting data systems for Fortune 100 companies. Founder of Absolut-e Data Com & BizStats AI." />
-    <meta property="twitter:image" content="/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Srini Centhala — The Mind Behind the Architecture" />
+    <meta name="twitter:description" content="Chief Data &amp; AI Architect. Turning complex data, technology and intelligence into systems that create business impact." />
+    <meta name="twitter:image" content="%VITE_SITE_URL%og-image.png" />
 
-    <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Srini Centhala",
+      "url": "%VITE_SITE_URL%",
+      "image": "%VITE_SITE_URL%images/srini-centhala.jpg",
       "jobTitle": "Founder & Chief Data and AI Architect",
       "worksFor": [
-        {
-          "@type": "Organization",
-          "name": "Absolut-e Data Com, Inc.",
-          "url": "https://www.absolut-e.com"
-        },
-        {
-          "@type": "Organization",
-          "name": "BizStats AI",
-          "url": "https://www.bizstats.ai"
-        }
+        { "@type": "Organization", "name": "Absolut-e Data Com, Inc.", "url": "https://www.absolut-e.com" },
+        { "@type": "Organization", "name": "BizStats AI", "url": "https://www.bizstats.ai" }
       ],
       "sameAs": [
         "https://linkedin.com/in/srinicenthala",
-        "https://www.absolut-e.com",
-        "https://www.bizstats.ai",
+        "https://github.com/Scenthala",
         "https://www.businessexpertpress.com/srini-centhala/"
       ],
       "knowsAbout": [
-        "Data Architecture",
-        "Artificial Intelligence",
-        "Machine Learning",
-        "Cloud Computing",
-        "Enterprise Architecture",
-        "MLOps",
-        "Big Data",
-        "Business Intelligence"
+        "Data Architecture", "Artificial Intelligence", "Machine Learning", "Cloud Computing",
+        "Enterprise Architecture", "MLOps", "Big Data", "Business Intelligence"
       ],
-      "alumniOf": {
-        "@type": "CollegeOrUniversity",
-        "name": "Bangalore University"
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "San Jose",
-        "addressRegion": "CA",
-        "addressCountry": "US"
-      }
+      "alumniOf": { "@type": "CollegeOrUniversity", "name": "Bangalore University" },
+      "address": { "@type": "PostalAddress", "addressLocality": "San Jose", "addressRegion": "CA", "addressCountry": "US" }
     }
     </script>
 
-    <!-- Analytics (Plausible — privacy-friendly, no cookies) -->
-    <!-- Uncomment and update domain when deployed -->
-    <!-- <script defer data-domain="srinicenthala.com" src="https://plausible.io/js/script.js"></script> -->
+    <script>
+      // Apply stored preferences before first paint, so nothing flashes.
+      (function () {
+        var root = document.documentElement
+        root.classList.add('js')
+        try {
+          var theme = localStorage.getItem('theme')
+          if (theme === 'light' || theme === 'dark') root.dataset.theme = theme
+          var motion = localStorage.getItem('motion')
+          var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          root.dataset.motion = motion || (reduced ? 'off' : 'on')
+        } catch (e) {}
+      })()
+    </script>
+    <noscript>
+      <style>
+        [hidden] { display: block !important; }
+        .journey__stage { display: grid !important; }
+      </style>
+    </noscript>
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
-    <link rel="apple-touch-icon" sizes="192x192" href="/favicon-192.png" />
-
-    <!-- PWA -->
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#0f1216" />
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preload" href="%BASE_URL%fonts/manrope.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="%BASE_URL%favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="%BASE_URL%favicon-192.png" />
+    <link rel="manifest" href="%BASE_URL%manifest.json" />
+    <meta name="theme-color" content="#080B14" />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
     <script>
       if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('%BASE_URL%sw.js').catch(() => {})
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('%BASE_URL%sw.js').catch(function () {})
         })
       }
     </script>

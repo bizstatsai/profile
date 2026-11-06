@@ -1,0 +1,153 @@
+/*
+  Motion rules. Nothing starts hidden: an element is only "armed" for its entrance
+  once the page is running and it is off screen. Everything that loops stops when
+  the visitor pauses motion or prefers less of it.
+*/
+
+/* Headlines are drawn on, left to right, the first time they enter the view. */
+.draw-in-text {
+  display: block;
+}
+
+.draw-in {
+  clip-path: inset(-12% 100% -18% -2%);
+}
+
+.draw-in.is-in {
+  clip-path: inset(-12% -2% -18% -2%);
+  transition: clip-path 1s var(--ease-out);
+}
+
+/* Diagrams assemble in the order data moves through them. */
+.ac-svg.is-armed .ac-node {
+  opacity: 0;
+}
+
+.ac-svg.is-armed.is-revealed .ac-node:not(.is-dim) {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  transition-delay: calc(var(--r, 0) * 70ms);
+}
+
+.ac-svg.is-armed .ac-edge__line[pathLength] {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.ac-svg.is-armed.is-revealed .ac-edge__line[pathLength] {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.7s ease;
+  transition-delay: calc(var(--r, 0) * 70ms + 120ms);
+}
+
+.ac-svg.is-armed .ac-edge--dashed,
+.ac-svg.is-armed .ac-arrow,
+.ac-svg.is-armed .ac-edge__label,
+.ac-svg.is-armed .ac-layer,
+.ac-svg.is-armed .ac-msg {
+  opacity: 0;
+}
+
+.ac-svg.is-armed.is-revealed .ac-edge--dashed,
+.ac-svg.is-armed.is-revealed .ac-arrow,
+.ac-svg.is-armed.is-revealed .ac-edge__label,
+.ac-svg.is-armed.is-revealed .ac-layer:not(.is-dim),
+.ac-svg.is-armed.is-revealed .ac-msg:not(.is-dim) {
+  opacity: 1;
+  transition: opacity 0.5s ease 0.35s;
+}
+
+/* A dot of data travels each solid connector, in flow order. */
+.ac-edge__pulse {
+  stroke-dasharray: 0.018 1.2;
+  stroke-dashoffset: 0.018;
+  opacity: 0;
+}
+
+.ac-svg.is-flowing .ac-edge__pulse {
+  animation: ac-pulse 5.4s linear infinite;
+  animation-delay: calc(var(--r, 0) * 0.42s + 0.9s);
+}
+
+@keyframes ac-pulse {
+  0% {
+    stroke-dashoffset: 0.018;
+    opacity: 0;
+  }
+  3% {
+    opacity: 1;
+  }
+  34% {
+    opacity: 1;
+  }
+  38% {
+    stroke-dashoffset: -1;
+    opacity: 0;
+  }
+  100% {
+    stroke-dashoffset: -1;
+    opacity: 0;
+  }
+}
+
+@keyframes ray-pulse {
+  0% {
+    stroke-dashoffset: 0.03;
+    opacity: 0;
+  }
+  4% {
+    opacity: 1;
+  }
+  52% {
+    opacity: 1;
+  }
+  58% {
+    stroke-dashoffset: -1;
+    opacity: 0;
+  }
+  100% {
+    stroke-dashoffset: -1;
+    opacity: 0;
+  }
+}
+
+@keyframes flow-up {
+  to {
+    background-position-y: -24px;
+  }
+}
+
+@keyframes flow-down {
+  to {
+    background-position-y: 24px;
+  }
+}
+
+/* Motion off: by the visitor's setting, or by the pause control. */
+[data-motion='off'] *,
+[data-motion='off'] *::before,
+[data-motion='off'] *::after {
+  animation-play-state: paused !important;
+}
+
+[data-motion='off'] .ac-edge__pulse,
+[data-motion='off'] .optics__pulse {
+  animation: none !important;
+  opacity: 0 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ac-svg.is-flowing .ac-edge__pulse,
+  .optics__pulse {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+
+  .btn:hover {
+    transform: none;
+  }
+}

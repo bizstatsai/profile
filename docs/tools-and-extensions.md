@@ -84,10 +84,7 @@
 ## NPM Packages (Suggested Additions)
 
 ### Animation
-| Package | Purpose |
-|---------|---------|
-| `framer-motion` | Page transitions, scroll animations |
-| `react-intersection-observer` | Trigger animations on scroll |
+None. Motion is CSS and Canvas 2D, with one store in `src/lib/motion.js`. Both animation packages were removed in the 2026 redesign.
 
 ### SEO
 | Package | Purpose |

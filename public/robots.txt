@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://srinicenthala.com/sitemap.xml
+Sitemap: https://bizstatsai.github.io/profile/sitemap.xml

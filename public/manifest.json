@@ -1,12 +1,12 @@
 {
   "name": "Srini Centhala — Chief Data and AI Architect",
   "short_name": "Srini Centhala",
-  "description": "Chief Data and AI Architect. 25+ years, Fortune 100 clients, 4 published books.",
+  "description": "Chief Data and AI Architect, technology strategist and enterprise architecture leader.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#0f1216",
-  "theme_color": "#0f1216",
+  "background_color": "#080B14",
+  "theme_color": "#080B14",
   "icons": [
     {
       "src": "./favicon-32.png",
@@ -16,6 +16,11 @@
     {
       "src": "./favicon-192.png",
       "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./favicon-512.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ]
