@@ -158,6 +158,30 @@
   margin-bottom: clamp(20px, 2.4vw, 32px);
 }
 
+.plate__ring {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  margin-bottom: 10px;
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.plate__ring a {
+  padding: 2px 8px;
+  color: var(--cat-consumption);
+  text-decoration: none;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+}
+
+.plate__ring a[data-ring='trial'] {
+  color: var(--cat-governance);
+}
+
 .plate__head h3 {
   margin-bottom: 12px;
   font-size: var(--text-xl);

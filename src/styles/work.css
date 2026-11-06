@@ -510,8 +510,16 @@
   margin-top: 12px;
 }
 
-.speaking__kit .btn {
-  justify-self: start;
+.speaking__ask {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 24px;
+}
+
+.speaking__ask p {
+  max-width: 56ch;
+  color: var(--ink-2);
 }
 
 .channels {
@@ -527,6 +535,37 @@
 
 .channels .link-out {
   margin-right: 12px;
+}
+
+.channels__planned {
+  margin-top: 24px;
+}
+
+.channels__planned > p {
+  margin-bottom: 12px;
+  color: var(--ink-3);
+}
+
+.channels__planned ul {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px clamp(20px, 2.4vw, 36px);
+}
+
+.channels__planned li {
+  padding-left: 12px;
+  border-left: 1px solid var(--line-2);
+}
+
+.channels__planned strong {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.channels__planned span {
+  color: var(--ink-2);
 }
 
 /* Recognition and credentials -------------------------------------------------- */
@@ -647,6 +686,10 @@
 }
 
 @media (max-width: 1040px) {
+  .channels__planned ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .library {
     grid-template-columns: 1fr;
   }
@@ -674,6 +717,10 @@
 }
 
 @media (max-width: 760px) {
+  .channels__planned ul {
+    grid-template-columns: 1fr;
+  }
+
   .project__measure,
   .project__head,
   .project--flip .project__measure,

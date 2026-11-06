@@ -115,3 +115,56 @@ export const navLinks = [
   { label: 'Publications', href: '#publications', key: 'publications' },
   { label: 'Contact', href: '#contact', key: 'contact' },
 ]
+
+/**
+ * "What I Do", as on the earlier site, set on the five layers of the opening drawing, top to bottom.
+ * Strategy runs across every layer. The cloud line says "experience" rather than "certified":
+ * the credentials on record are course certificates, not vendor certifications.
+ */
+export const whatIDo = {
+  title: 'What I Do',
+  subtitle: 'Designing the central nervous system for enterprise intelligence.',
+  layers: [
+    {
+      layer: 'Business decisions',
+      cat: 'consumption',
+      title: 'Business Intelligence & Analytics',
+      text: 'Designing decision support systems, KPI frameworks, and BI solutions with MicroStrategy, Power BI, Tableau, Cognos, and the BizStats AI analytics platform.',
+      link: { href: '#data-journey', label: 'Section 04, From data to decisions' },
+    },
+    {
+      layer: 'Intelligent systems',
+      cat: 'ai',
+      title: 'AI & MLOps Platform Design',
+      text: 'End-to-end AI platform architecture — from defining ML business cases and selecting algorithms to MLOps pipelines, LLMs, deep learning, NLP, and production AI systems using TensorFlow, PyTorch, and OpenAI APIs.',
+      link: { href: '#plate-mlops', label: 'Plate 5.1, MLOps Pipeline Pattern' },
+    },
+    {
+      layer: 'Knowledge network',
+      cat: 'storage',
+      title: 'Enterprise Data Architecture',
+      text: 'Designing data lakes, cloud data warehouses, and EDW systems using Star Schema, Snowflake Schema, and Data Vault 2.0. Expert in metadata-driven architectures for "develop once, deploy many" strategies.',
+      link: { href: '#plate-lakehouse', label: 'Plate 3.1, Modern Lakehouse Architecture' },
+    },
+    {
+      layer: 'Cloud infrastructure',
+      cat: 'process',
+      title: 'Multi-Cloud Architecture',
+      text: 'Experience across Google Cloud, AWS, and Azure. Building cloud data lakes (S3, Glue, Athena, Kinesis, Redshift), real-time streaming analytics, and multi-cloud strategies with Snowflake and Databricks.',
+      link: { href: '#plate-cloud-migration', label: 'Plate 3.4, Cloud Migration Playbook' },
+    },
+    {
+      layer: 'Data streams',
+      cat: 'source',
+      title: 'Data Engineering & Big Data',
+      text: 'Hadoop, Spark, Kafka, MapReduce at petabyte scale. ETL/ELT pipelines with Informatica, DataStage, Ab Initio, Matillion. Real-time and batch processing architectures.',
+      link: { href: '#plate-streaming', label: 'Plate 3.3, Real-Time Streaming Architecture' },
+    },
+  ],
+  across: {
+    layer: 'Across every layer',
+    title: 'C-Suite Strategy & Consulting',
+    text: 'Partnering with CIOs, CDOs, and CTOs to architect comprehensive data strategies. Translating abstract business goals into high-performance data ecosystems for Fortune 100 companies.',
+    link: { href: '#philosophy', label: 'Section 02, How I think' },
+  },
+}

@@ -25,6 +25,7 @@ export default function Footer() {
         </div>
         <div className="footer__base tech">
           <span suppressHydrationWarning>© {new Date().getFullYear()} {profile.name}. All rights reserved.</span>
+          <span className="footer__note">Diagrams are rendered from Mermaid sources in this site's repository. No client systems are depicted.</span>
           <MotionToggle />
         </div>
       </div>

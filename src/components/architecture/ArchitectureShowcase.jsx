@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { diagrams, STATUS } from '../../data/architectureDiagrams'
 import { architecturePatterns } from '../../data/architecturePatterns'
+import { techRadar } from '../../data/publications'
 import DiagramCard from './DiagramCard'
 import DiagramThumb from './DiagramThumb'
 
 const titleOf = (slug) => architecturePatterns.find(p => p.slug === slug)?.title ?? slug
+const ringOf = (ring) => techRadar.find(r => r.ring.toLowerCase() === ring)
 
 /** A hash such as #plate-lakehouse/CAT opens that plate and selects that component. */
 const readHash = () => {
@@ -58,6 +60,12 @@ function Plate({ plate, number, active, node }) {
   return (
     <article id={`plate-${plate.slug}`} className="plate" hidden={!active} aria-labelledby={`plate-${plate.slug}-title`}>
       <header className="plate__head">
+        {plate.ring && (
+          <p className="plate__ring tech">
+            <span>{plate.layer}</span>
+            <a href="#radar" data-ring={plate.ring} title={ringOf(plate.ring)?.description}>{ringOf(plate.ring)?.ring ?? plate.ring}</a>
+          </p>
+        )}
         <h3 id={`plate-${plate.slug}-title`}>{plate.title}</h3>
         <p className="plate__intent">{plate.intent}</p>
         <p className="plate__status tech">{STATUS[diagram.status].note}</p>

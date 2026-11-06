@@ -156,7 +156,14 @@ function SpeakingBlock() {
           <div><dt className="tech">Audiences</dt><dd>{speakerKit.audiences.join(', ')}</dd></div>
           <div><dt className="tech">Past clients</dt><dd>{speakerKit.pastClients.join(', ')}</dd></div>
         </dl>
-        <a className="btn btn--line" href={`mailto:${profile.email}?subject=Speaking%20Inquiry`}>Ask about a session</a>
+        <div className="speaking__ask">
+          <p>
+            Interested in a session? Reach out via{' '}
+            <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a> or{' '}
+            <a href={`mailto:${profile.email}`}>{profile.email}</a> with event details, audience size and preferred topic.
+          </p>
+          <a className="btn btn--line" href={`mailto:${profile.email}?subject=Speaking%20Inquiry`}>Ask about a session</a>
+        </div>
       </div>
     </section>
   )
@@ -164,7 +171,7 @@ function SpeakingBlock() {
 
 export default function PublicationLibrary() {
   const active = thoughtLeadership.filter(t => t.active)
-  const planned = thoughtLeadership.filter(t => !t.active).map(t => t.platform)
+  const planned = thoughtLeadership.filter(t => !t.active)
   return (
     <>
       <SectionHead
@@ -189,7 +196,17 @@ export default function PublicationLibrary() {
             <span>{t.description}</span>
           </p>
         ))}
-        <p className="tech">{planned.join(', ')} channels are planned, and are not yet published.</p>
+        <div className="channels__planned">
+          <p className="tech">Planned channels, not yet published</p>
+          <ul>
+            {planned.map(t => (
+              <li key={t.platform}>
+                <strong>{t.platform}</strong>
+                <span>{t.description}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
     </>
   )

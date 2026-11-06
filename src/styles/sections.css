@@ -29,46 +29,120 @@
   align-items: start;
 }
 
-/* The photograph as taken: whole, in its own colour, no larger than its 400 pixels hold up. */
+/* The photograph as taken: whole, in its own colour, no larger than its 400 pixels hold up.
+   Two offset outlines behind it echo the stacked planes of the opening drawing. */
+.concept__portrait {
+  position: relative;
+  isolation: isolate;
+  margin: 0 20px 20px 0;
+}
+
+.concept__portrait::before,
+.concept__portrait::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.concept__portrait::before {
+  transform: translate(10px, 10px);
+  border: 1px solid color-mix(in srgb, var(--cat-source) 55%, transparent);
+}
+
+.concept__portrait::after {
+  transform: translate(20px, 20px);
+  border: 1px solid color-mix(in srgb, var(--violet) 60%, transparent);
+}
+
 .concept__portrait img {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 3px;
-  box-shadow: 0 0 0 1px var(--line-2);
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px var(--line-2), 0 24px 48px -28px rgba(0, 0, 0, 0.6);
 }
 
+/* The bio as a statement: a marker on a fine rule, and the named clients in full ink. */
 .concept__bio {
+  position: relative;
   max-width: 62ch;
+  padding-left: clamp(18px, 1.8vw, 26px);
   font-size: 1.1875rem;
-  line-height: 1.6;
+  line-height: 1.65;
+  color: var(--ink-2);
+  border-left: 1px solid var(--line);
+}
+
+.concept__bio::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -1px;
+  width: 2px;
+  height: 56px;
+  background: var(--violet);
+}
+
+.concept__bio strong {
+  font-weight: 500;
   color: var(--ink);
 }
 
-/* A drawing's title block. */
+/* A drawing's title block: the layer colours across the top, a sheet header, facts in cells. */
 .titleblock {
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  line-height: 1.55;
+  overflow: hidden;
+  font-size: var(--text-sm);
+  line-height: 1.5;
   background: var(--surface);
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-2);
   border-radius: 6px;
 }
 
-.titleblock > div {
-  display: grid;
-  grid-template-columns: 96px minmax(0, 1fr);
+.titleblock::before {
+  content: '';
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg,
+    var(--cat-source) 0 20%, var(--cat-process) 20% 40%, var(--cat-storage) 40% 60%,
+    var(--cat-ai) 60% 80%, var(--cat-consumption) 80% 100%);
+}
+
+.titleblock__head {
+  display: flex;
+  justify-content: space-between;
   gap: 12px;
-  padding: 10px 14px;
+  padding: 10px 16px;
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--line-2);
+}
+
+.titleblock dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.titleblock dl > div {
+  min-width: 0;
+  padding: 12px 16px;
   border-bottom: 1px solid var(--line);
 }
 
-.titleblock > div:last-child {
-  border-bottom: 0;
+.titleblock dl > div:not(.is-wide):nth-child(even) {
+  border-right: 1px solid var(--line);
+}
+
+.titleblock .is-wide {
+  grid-column: 1 / -1;
 }
 
 .titleblock dt {
-  padding-top: 1px;
+  margin-bottom: 3px;
+  font-family: var(--font-tech);
   font-size: 0.6875rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -76,9 +150,34 @@
 }
 
 .titleblock dd {
-  min-width: 0;
   overflow-wrap: anywhere;
+  text-wrap: balance;
   color: var(--ink);
+}
+
+.titleblock .is-name dd {
+  font-size: var(--text-lg);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.titleblock .is-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  border-bottom: 0;
+  background: var(--bg-2);
+}
+
+.titleblock .is-foot dt {
+  margin-bottom: 0;
+}
+
+.titleblock .is-foot dd {
+  font-family: var(--font-tech);
+  font-size: var(--text-xs);
+  color: var(--ink-2);
 }
 
 .proof {
@@ -106,9 +205,163 @@
   line-height: 1.4;
 }
 
+/* What I Do: the practice drawn as the layer stack of the opening drawing, strategy across it. */
+.practice {
+  margin-top: clamp(64px, 8vw, 120px);
+  padding-top: clamp(28px, 3vw, 44px);
+  border-top: 1px solid var(--line-2);
+}
+
+.practice__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px clamp(32px, 5vw, 80px);
+  align-items: end;
+}
+
+.practice__head h3 {
+  font-size: clamp(1.875rem, 1.2rem + 2vw, 3rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.practice__head > div:first-child > p {
+  max-width: 44ch;
+  margin-top: 12px;
+  font-size: var(--text-lg);
+  color: var(--ink-2);
+}
+
+.practice__roles > p {
+  margin-bottom: 8px;
+}
+
+.practice__roles ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+}
+
+.practice__roles li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-tech);
+  font-size: var(--text-xs);
+  color: var(--ink-2);
+}
+
+.practice__roles li::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  background: var(--line-2);
+}
+
+.practice__stack {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 0.36fr);
+  margin-top: clamp(28px, 3vw, 44px);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line-2);
+  border-radius: 6px;
+}
+
+.practice__area {
+  --mark: var(--cat-storage);
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.4fr);
+  gap: 10px clamp(20px, 2.6vw, 40px);
+  padding: clamp(18px, 1.8vw, 24px) clamp(18px, 2vw, 28px);
+  box-shadow: inset 3px 0 0 var(--mark);
+  transition: background 0.25s;
+}
+
+.practice__area[data-cat='consumption'] { --mark: var(--cat-consumption); }
+.practice__area[data-cat='ai'] { --mark: var(--cat-ai); }
+.practice__area[data-cat='process'] { --mark: var(--cat-process); }
+.practice__area[data-cat='source'] { --mark: var(--cat-source); }
+
+.practice__layers .practice__area + .practice__area {
+  border-top: 1px solid var(--line);
+}
+
+.practice__layers .practice__area:hover {
+  background: color-mix(in srgb, var(--mark) 6%, transparent);
+}
+
+.practice__layer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mark);
+}
+
+.practice__layer svg {
+  flex: none;
+  fill: color-mix(in srgb, var(--mark) 22%, transparent);
+  stroke: var(--mark);
+  stroke-width: 1.2;
+}
+
+.practice__area h4 {
+  font-size: var(--text-lg);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.practice__ref {
+  display: inline-block;
+  margin-top: 10px;
+  font-family: var(--font-tech);
+  font-size: var(--text-xs);
+  color: var(--ink-2);
+}
+
+.practice__ref:hover {
+  color: var(--ink);
+}
+
+.practice__text {
+  align-self: center;
+  color: var(--ink-2);
+}
+
+/* Strategy spans the stack: one band down the side, in the governance colour. */
+.practice__across {
+  display: flex;
+  align-items: center;
+  background: var(--bg-2);
+  border-left: 1px solid var(--line-2);
+  box-shadow: inset 3px 0 0 var(--cat-governance);
+}
+
+.practice__across .practice__area {
+  --mark: var(--cat-governance);
+  grid-template-columns: 1fr;
+  padding: clamp(22px, 2.4vw, 32px);
+  box-shadow: none;
+}
+
+.practice__across .practice__text {
+  align-self: start;
+}
+
+/* The band's tinted ground needs the label nudged toward ink to keep 4.5:1 in the light theme. */
+.practice__across .practice__layer {
+  color: color-mix(in srgb, var(--mark) 85%, var(--ink));
+}
+
 .concept__lists {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: var(--gap) clamp(32px, 5vw, 80px);
   margin-top: clamp(36px, 4vw, 56px);
 }
@@ -914,6 +1167,16 @@
 }
 
 @media (max-width: 1040px) {
+  .practice__stack {
+    grid-template-columns: 1fr;
+  }
+
+  .practice__across {
+    border-left: 0;
+    border-top: 1px solid var(--line-2);
+    box-shadow: inset 0 3px 0 var(--cat-governance);
+  }
+
   .concept__body {
     grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
   }
@@ -1151,6 +1414,19 @@
 }
 
 @media (max-width: 620px) {
+  .practice__head,
+  .practice__area {
+    grid-template-columns: 1fr;
+  }
+
+  .titleblock dl {
+    grid-template-columns: 1fr;
+  }
+
+  .titleblock dl > div:not(.is-wide):nth-child(even) {
+    border-right: 0;
+  }
+
   .gov-index li a {
     grid-template-columns: 1fr;
   }

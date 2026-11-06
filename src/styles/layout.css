@@ -346,6 +346,10 @@
   overflow-wrap: anywhere;
 }
 
+.footer__note {
+  color: var(--ink-3);
+}
+
 .footer__base {
   display: flex;
   flex-wrap: wrap;
